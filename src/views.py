@@ -14,4 +14,9 @@ def article(team, type, name):
     content = f.read()
     f.close()
 
-    return render_template('article.html', content=content)
+    path = cpath + spath + '/meta.html'
+    f = open(path, 'r')
+    meta = f.read()
+    f.close()
+
+    return render_template('article.html', content=content, meta=meta)
