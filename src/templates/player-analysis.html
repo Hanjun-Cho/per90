@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %} Home | FMS {% endblock %}
+{% block content %}
+<div class="w-[800px] small:w-[100%]">
+    <div>
+        <a href="{{articles[0].directory}}"><div class="w-[100%] aspect-video mt-[30px] small:mt-0 flex items-end">
+            <div>
+                <img src="{{url_for('static', filename='articles'+articles[0].directory+'/thumbnail.jpg')}}" class="w-[100%] h-[100%] object-cover">
+                <div class="bg-black w-[100%] pb-[20px] flex justify-center">
+                    <div>
+                        <h1 class="font-bold text-white text-[30px] mini:text-[20px] ml-[30px] pr-[20px] mt-[20px] ">{{articles[0].title}}</h1>
+                        <p class="text-[15px] mini:text-[11px] ml-[30px] text-white/50">{{articles[0].description}}</p>
+                    </div>
+                </div>
+                <div class="w-[100%] h-[5px] bg-blue"></div>
+            </div>
+        </div></a>
+    
+        <div class="small:hidden mini:hidden w-[100%] grid grid-cols-3 gap-[10px] mt-[10px]">
+            <a href="{{articles[1].directory}}">
+                <img class="w-[100%] aspect-video" src="{{url_for('static', filename='articles'+articles[1].directory+'/thumbnail.jpg')}}">
+                <div class="w-[100%] mt-[10px]">
+                    <h1 class="font-bold text-[17px]">{{articles[1].title}}</h1>
+                    <p class="text-[14px]">{{articles[1].description}}</p>
+                </div>
+            </a>
+    
+            <!-- HERE GOES 2ND AND 3RD ARTICLES -->
+            <!-- <a href="/player-analysis/spurs/ruslan-malinovskyi">
+                <div class="w-[100%] aspect-video bg-blue"></div>
+                <div class="w-[100%] mt-[10px]">
+                    <h1 class="font-bold text-[17px]">Why Ruslan Malinovskyi isnt the player to fix Spurs midfield creativity crisis</h1>
+                    <p class="text-[14px]">Ruslan Malinovskyi - A Player Analysis</p>
+                </div>
+            </a>
+    
+            <a href="/player-analysis/spurs/ruslan-malinovskyi">
+                <div class="w-[100%] aspect-video bg-blue"></div>
+                <div class="w-[100%] mt-[10px]">
+                    <h1 class="font-bold text-[17px]">Why Ruslan Malinovskyi isnt the player to fix Spurs midfield creativity crisis</h1>
+                    <p class="text-[14px]">Ruslan Malinovskyi - A Player Analysis</p>
+                </div>
+            </a> -->
+        </div>
+    
+        <!-- ONCE THERES MORE THAN 10, WORK ON INFINITE LOADING -->
+        <div class="hidden mini:block small:block w-[calc(100%-20px)] ml-[10px]">
+            {% for i in range(articles|length-1) %}
+                <a href="{{articles[i+1].directory}}" class="w-[100%] grid grid-cols-[40%_auto] mt-[10px]">
+                    <img class="aspect-video" src="{{url_for('static', filename='articles'+articles[i+1].directory+'/thumbnail.jpg')}}"></img>
+                    <div class="mt-0 ml-[10px] flex items-center">
+                        <div>
+                            <h1 class="font-bold text-[19px] mini:text-[13px]">{{articles[i+1].title}}</h1>
+                            <p class="text-[17px] mini:text-[11px]">{{articles[i+1].description}}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}`
+        </div>
+    </div>
+</div>
+{% endblock %}

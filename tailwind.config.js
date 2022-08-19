@@ -1,22 +1,20 @@
 module.exports = {
-  content: ["./src/templates/**/**.{html,js}"],
+  content: ["./src/**/**/**.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        mont: ["MONT", "sans-serif"]
+      }
+    },
     colors: {
       'white':'#FFFFFF',
-      'blue':'#002E62',
-      'blue2':'#5193BC',
-      'dark_blue':'#00234A',
-      'yellow':'#E9E9A8',
-      'green':'#B9FBB9',
-      'red':'#FFBFBF',
-      'purple':'#E8BFFF',
-      'pink':'#FFBFDB'
+      'black':'#0d0d0d',
+      'spurs-blue':'#132257',
+      'blue':'#42a2d6'
     },
     screens: {
-      'large':{'min':'1450px'},
-      'medium':{'max':'1449px'},
-      'mini':{'max':'899px'}
+      'small':{'max':'860px'},
+      'mini':{'max':'500px'}
     },
   },
   plugins: [],

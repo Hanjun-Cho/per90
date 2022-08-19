@@ -8,6 +8,52 @@
         {% block meta %}{% endblock %}
     </head>
     <body>
-        <div class="flex justify-center">{% block content %}{% endblock %}</div>
+        <div class="w-full h-[50px] bg-black flex text-white font-mont fixed top-0">
+            <div class="w-[800px] grid grid-cols-[150px_auto] mini:hidden small:hidden">
+                <a href="/" class="flex justify-center items-center">
+                    <h1 class="font-bold text-[23px] pt-[3px]">
+                        <span class="text-blue">PER</span>90
+                    </h1>
+                </a>
+
+                <div class="grid grid-cols-5">
+                    <a href="/player-analysis" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
+                        <h1 class="font-bold text-[13px] pt-[3px]">
+                            SCOUTING
+                        </h1>
+                    </a>
+
+                    <a href="/match-analysis" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
+                        <h1 class="font-bold text-[13px] pt-[3px]">
+                            ANALYSIS
+                        </h1>
+                    </a>
+
+                    <a href="/news" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
+                        <h1 class="font-bold text-[13px] pt-[3px]">
+                            NEWS
+                        </h1>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="w-[50px] h-[100%] hidden mini:block small:block">
+                <div class="h-[100%] flex justify-center items-center">
+                    <img src="{{url_for('static', filename='img/icons/menu.png')}}" class="w-[45%] h-[45%]">
+                </div>
+            </div>
+
+            <div class="w-[100%] h-[100%] hidden mini:block small:block absolute">
+                <div class="w-[100%] h-[100%] flex justify-center">
+                    <div class="w-[150px] flex justify-center items-center">
+                        <h1 class="font-bold text-[23px] pt-[3px]">
+                            <span class="text-blue">PER</span>90
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center w-full mt-[50px]">{% block content %}{% endblock %}</div>
     </body>
 </html>

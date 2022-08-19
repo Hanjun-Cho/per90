@@ -4,5 +4,11 @@
 {{meta | safe}}
 {% endblock %}
 {% block content %}
-<div class="w-[800px]">{{content | safe}}</div>
+<div class="w-[800px] small:w-[calc(100%-60px)] mt-[30px]">
+    <div class="w-[100%]">
+        <h1 class="text-[40px] mini:text-[30px] font-bold">{{title}}</h1>
+        <p class="mt-[20px]">Written by: {{author}}</p>
+    </div>
+    <div class="mt-[10px]">{{content | safe}}</div>
+</div>
 {% endblock %}

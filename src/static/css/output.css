@@ -472,6 +472,54 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: static;
 }
 
+.fixed {
+  position: fixed;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.mt-\[30px\] {
+  margin-top: 30px;
+}
+
+.mt-\[20px\] {
+  margin-top: 20px;
+}
+
+.mt-\[10px\] {
+  margin-top: 10px;
+}
+
+.mt-\[50px\] {
+  margin-top: 50px;
+}
+
+.ml-\[10px\] {
+  margin-left: 10px;
+}
+
+.mt-0 {
+  margin-top: 0px;
+}
+
+.mb-\[100px\] {
+  margin-bottom: 100px;
+}
+
+.ml-\[20px\] {
+  margin-left: 20px;
+}
+
+.ml-\[30px\] {
+  margin-left: 30px;
+}
+
 .block {
   display: block;
 }
@@ -480,10 +528,278 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: flex;
 }
 
+.grid {
+  display: grid;
+}
+
+.hidden {
+  display: none;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.h-\[50px\] {
+  height: 50px;
+}
+
+.h-\[100\%\] {
+  height: 100%;
+}
+
+.h-\[45\%\] {
+  height: 45%;
+}
+
+.h-\[100px\] {
+  height: 100px;
+}
+
+.h-\[200px\] {
+  height: 200px;
+}
+
+.h-\[10px\] {
+  height: 10px;
+}
+
+.h-\[5px\] {
+  height: 5px;
+}
+
 .w-\[800px\] {
   width: 800px;
 }
 
+.w-\[100\%\] {
+  width: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-\[50px\] {
+  width: 50px;
+}
+
+.w-\[45\%\] {
+  width: 45%;
+}
+
+.w-\[150px\] {
+  width: 150px;
+}
+
+.w-\[calc\(100\%-20px\)\] {
+  width: calc(100% - 20px);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.grid-cols-\[150px_auto\] {
+  grid-template-columns: 150px auto;
+}
+
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-\[40\%_auto\] {
+  grid-template-columns: 40% auto;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-center {
+  align-items: center;
+}
+
 .justify-center {
   justify-content: center;
+}
+
+.gap-\[10px\] {
+  gap: 10px;
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 13 13 / var(--tw-bg-opacity));
+}
+
+.bg-blue {
+  --tw-bg-opacity: 1;
+  background-color: rgb(66 162 214 / var(--tw-bg-opacity));
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.pt-\[3px\] {
+  padding-top: 3px;
+}
+
+.pr-\[10px\] {
+  padding-right: 10px;
+}
+
+.pr-\[20px\] {
+  padding-right: 20px;
+}
+
+.pb-\[20px\] {
+  padding-bottom: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-mont {
+  font-family: MONT, sans-serif;
+}
+
+.text-\[40px\] {
+  font-size: 40px;
+}
+
+.text-\[23px\] {
+  font-size: 23px;
+}
+
+.text-\[13px\] {
+  font-size: 13px;
+}
+
+.text-\[17px\] {
+  font-size: 17px;
+}
+
+.text-\[14px\] {
+  font-size: 14px;
+}
+
+.text-\[19px\] {
+  font-size: 19px;
+}
+
+.text-\[25px\] {
+  font-size: 25px;
+}
+
+.text-\[20px\] {
+  font-size: 20px;
+}
+
+.text-\[30px\] {
+  font-size: 30px;
+}
+
+.text-\[15px\] {
+  font-size: 15px;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-blue {
+  --tw-text-opacity: 1;
+  color: rgb(66 162 214 / var(--tw-text-opacity));
+}
+
+.text-white\/50 {
+  color: rgb(255 255 255 / 0.5);
+}
+
+.transition-colors {
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+@font-face {
+  font-family: "MONT";
+
+  src: url("../font/mont.otf");
+}
+
+.hover\:bg-blue:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(66 162 214 / var(--tw-bg-opacity));
+}
+
+@media (max-width: 860px) {
+  .small\:mt-0 {
+    margin-top: 0px;
+  }
+
+  .small\:block {
+    display: block;
+  }
+
+  .small\:hidden {
+    display: none;
+  }
+
+  .small\:w-\[calc\(100\%-60px\)\] {
+    width: calc(100% - 60px);
+  }
+
+  .small\:w-\[100\%\] {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .mini\:block {
+    display: block;
+  }
+
+  .mini\:hidden {
+    display: none;
+  }
+
+  .mini\:text-\[30px\] {
+    font-size: 30px;
+  }
+
+  .mini\:text-\[13px\] {
+    font-size: 13px;
+  }
+
+  .mini\:text-\[11px\] {
+    font-size: 11px;
+  }
+
+  .mini\:text-\[12px\] {
+    font-size: 12px;
+  }
+
+  .mini\:text-\[10px\] {
+    font-size: 10px;
+  }
+
+  .mini\:text-\[20px\] {
+    font-size: 20px;
+  }
 }

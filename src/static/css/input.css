@@ -5,3 +5,8 @@
 @layer utilities {
     .text-transparent { color:transparent; }
 }
+
+@font-face {
+    font-family: "MONT";
+    src: url("../font/mont.otf");
+}

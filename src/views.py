@@ -1,13 +1,13 @@
 from flask import Blueprint, render_template, url_for
+from .model import Articles
 import os
+from . import db
 views = Blueprint('views', __name__)
 
-@views.route('/<team>/<type>/<name>')
+@views.route('/<type>/<team>/<name>')
 def article(team, type, name):
-    print(team + ' ' + type + ' ' + name)
-
     cpath = os.path.dirname(os.path.realpath(__file__))
-    spath = url_for('static', filename='articles/'+team+'/'+type+'/'+name)
+    spath = url_for('static', filename='articles/'+type+'/'+team+'/'+name)
     path = cpath + spath + '/article.html'
 
     f = open(path, 'r')
@@ -19,4 +19,17 @@ def article(team, type, name):
     meta = f.read()
     f.close()
 
-    return render_template('article.html', content=content, meta=meta)
+    directory = '/'+type+'/'+team+'/'+name
+    article = Articles.query.filter_by(directory=directory).first()
+    article.views += 1
+    db.session.commit()
+    return render_template('article.html', content=content, meta=meta, title=article.title, author=article.author)
+
+@views.route('/player-analysis')
+def player_analysis():
+    articles = Articles.query.filter_by(type='player-analysis').all()
+
+    for i in articles:
+        print(i.title)
+
+    return render_template('player-analysis.html', articles=articles)
