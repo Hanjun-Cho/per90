@@ -28,8 +28,9 @@ def article(team, type, name):
 @views.route('/player-analysis')
 def player_analysis():
     articles = Articles.query.filter_by(type='player-analysis').all()
+    return render_template('home.html', articles=articles)
 
-    for i in articles:
-        print(i.title)
-
-    return render_template('player-analysis.html', articles=articles)
+@views.route('/match-analysis')
+def match_analysis():
+    articles = Articles.query.all()
+    return render_template('home.html', articles=articles)
