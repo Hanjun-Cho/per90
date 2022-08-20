@@ -480,10 +480,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: absolute;
 }
 
-.relative {
-  position: relative;
-}
-
 .top-0 {
   top: 0px;
 }
@@ -508,28 +504,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 50px;
 }
 
+.ml-\[30px\] {
+  margin-left: 30px;
+}
+
 .ml-\[10px\] {
   margin-left: 10px;
 }
 
 .mt-0 {
   margin-top: 0px;
-}
-
-.mb-\[100px\] {
-  margin-bottom: 100px;
-}
-
-.ml-\[20px\] {
-  margin-left: 20px;
-}
-
-.ml-\[30px\] {
-  margin-left: 30px;
-}
-
-.mt-\[-50px\] {
-  margin-top: -50px;
 }
 
 .block {
@@ -564,44 +548,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 45%;
 }
 
-.h-\[100px\] {
-  height: 100px;
-}
-
-.h-\[200px\] {
-  height: 200px;
-}
-
-.h-\[10px\] {
-  height: 10px;
-}
-
 .h-\[5px\] {
   height: 5px;
-}
-
-.h-\[250px\] {
-  height: 250px;
-}
-
-.h-\[13px\] {
-  height: 13px;
-}
-
-.h-\[25px\] {
-  height: 25px;
-}
-
-.h-\[17px\] {
-  height: 17px;
-}
-
-.min-h-\[calc\(100\%-50px\)\] {
-  min-height: calc(100% - 50px);
-}
-
-.min-h-\[calc\(100\%-100px\)\] {
-  min-height: calc(100% - 100px);
 }
 
 .w-\[800px\] {
@@ -652,18 +600,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: 40% auto;
 }
 
-.grid-cols-\[50px_auto\] {
-  grid-template-columns: 50px auto;
-}
-
-.grid-cols-\[auto_50px_auto\] {
-  grid-template-columns: auto 50px auto;
-}
-
-.grid-rows-\[50px_auto\] {
-  grid-template-rows: 50px auto;
-}
-
 .items-end {
   align-items: flex-end;
 }
@@ -680,10 +616,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 10px;
 }
 
-.truncate {
+.overflow-hidden {
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .bg-black {
@@ -696,63 +630,29 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(66 162 214 / var(--tw-bg-opacity));
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-spurs-blue {
-  --tw-bg-opacity: 1;
-  background-color: rgb(19 34 87 / var(--tw-bg-opacity));
-}
-
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
-}
-
-.pt-\[3px\] {
-  padding-top: 3px;
-}
-
-.pr-\[10px\] {
-  padding-right: 10px;
-}
-
-.pr-\[20px\] {
-  padding-right: 20px;
-}
-
-.pb-\[20px\] {
-  padding-bottom: 20px;
-}
-
-.pb-\[30px\] {
-  padding-bottom: 30px;
-}
-
-.pb-\[50px\] {
-  padding-bottom: 50px;
 }
 
 .pb-\[100px\] {
   padding-bottom: 100px;
 }
 
-.pb-\[75px\] {
-  padding-bottom: 75px;
-}
-
-.pr-\[30px\] {
-  padding-right: 30px;
-}
-
-.pb-\[10px\] {
-  padding-bottom: 10px;
+.pt-\[3px\] {
+  padding-top: 3px;
 }
 
 .pb-\[60px\] {
   padding-bottom: 60px;
+}
+
+.pb-\[20px\] {
+  padding-bottom: 20px;
+}
+
+.pr-\[20px\] {
+  padding-right: 20px;
 }
 
 .text-center {
@@ -775,24 +675,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 13px;
 }
 
-.text-\[17px\] {
-  font-size: 17px;
-}
-
-.text-\[14px\] {
-  font-size: 14px;
-}
-
 .text-\[19px\] {
   font-size: 19px;
-}
-
-.text-\[25px\] {
-  font-size: 25px;
-}
-
-.text-\[20px\] {
-  font-size: 20px;
 }
 
 .text-\[30px\] {
@@ -803,8 +687,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 15px;
 }
 
-.text-\[18px\] {
-  font-size: 18px;
+.text-\[17px\] {
+  font-size: 17px;
+}
+
+.text-\[14px\] {
+  font-size: 14px;
+}
+
+.text-\[10px\] {
+  font-size: 10px;
+}
+
+.text-\[11px\] {
+  font-size: 11px;
 }
 
 .font-bold {
@@ -813,6 +709,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .text-white {
@@ -837,10 +737,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
 }
 
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 @font-face {
   font-family: "MONT";
 
   src: url("../font/mont.otf");
+}
+
+.hover\:h-\[130\%\]:hover {
+  height: 130%;
+}
+
+.hover\:w-\[130\%\]:hover {
+  width: 130%;
 }
 
 .hover\:bg-blue:hover {
@@ -887,27 +801,19 @@ Ensure the default browser behavior of the `hidden` attribute.
     font-size: 30px;
   }
 
-  .mini\:text-\[13px\] {
-    font-size: 13px;
-  }
-
-  .mini\:text-\[11px\] {
-    font-size: 11px;
-  }
-
-  .mini\:text-\[12px\] {
-    font-size: 12px;
-  }
-
-  .mini\:text-\[10px\] {
-    font-size: 10px;
+  .mini\:text-\[15px\] {
+    font-size: 15px;
   }
 
   .mini\:text-\[20px\] {
     font-size: 20px;
   }
 
-  .mini\:text-\[15px\] {
-    font-size: 15px;
+  .mini\:text-\[11px\] {
+    font-size: 11px;
+  }
+
+  .mini\:text-\[13px\] {
+    font-size: 13px;
   }
 }

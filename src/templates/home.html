@@ -5,11 +5,14 @@
     <div>
         <a href="{{articles[articles|length-1].directory}}"><div class="w-[100%] aspect-video mt-[30px] small:mt-0 flex items-end">
             <div>
-                <img src="{{url_for('static', filename='articles'+articles[articles|length-1].directory+'/thumbnail.jpg')}}" class="w-[100%] h-[100%] object-cover">
+                <div class="w-[100%] aspect-video overflow-hidden">
+                    <img src="{{url_for('static', filename='articles'+articles[articles|length-1].directory+'/thumbnail.jpg')}}" 
+                    class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all">
+                </div>
                 <div class="bg-black w-[100%] pb-[20px] flex justify-center">
                     <div>
                         <h1 class="font-bold text-white text-[30px] mini:text-[20px] ml-[30px] pr-[20px] mt-[20px] ">{{articles[articles|length-1].title}}</h1>
-                        <p class="text-[15px] mini:text-[11px] mt-[10px] ml-[30px] text-white/50">{{articles[articles|length-1].author}} - {{articles[articles|length-1].type}}</p>
+                        <p class="text-[15px] mini:text-[11px] mt-[10px] ml-[30px] text-white/50">{{articles[articles|length-1].author}} - {{articles[articles|length-1].uploaded}}</p>
                     </div>
                 </div>
                 <div class="w-[100%] h-[5px] bg-blue"></div>
@@ -18,26 +21,35 @@
     
         <div class="small:hidden mini:hidden w-[100%] grid grid-cols-3 gap-[10px] mt-[10px]">
             <a href="{{articles[articles|length-2].directory}}">
-                <img class="w-[100%] aspect-video" src="{{url_for('static', filename='articles'+articles[articles|length-2].directory+'/thumbnail.jpg')}}">
+                <div class="w-[100%] aspect-video overflow-hidden">
+                    <img class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all" 
+                    src="{{url_for('static', filename='articles'+articles[articles|length-2].directory+'/thumbnail.jpg')}}">
+                </div>
                 <div class="w-[100%] mt-[10px]">
                     <h1 class="font-bold text-[17px]">{{articles[articles|length-2].title}}</h1>
-                    <p class="text-[14px]">{{articles[articles|length-2].author}} - {{articles[articles|length-2].type}}</p>
+                    <p class="text-[14px]">{{articles[articles|length-2].author}} - {{articles[articles|length-2].uploaded}}</p>
                 </div>
             </a>
 
             <a href="{{articles[articles|length-3].directory}}">
-                <img class="w-[100%] aspect-video" src="{{url_for('static', filename='articles'+articles[articles|length-3].directory+'/thumbnail.jpg')}}">
+                <div class="w-[100%] aspect-video overflow-hidden">
+                    <img class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all" 
+                    src="{{url_for('static', filename='articles'+articles[articles|length-3].directory+'/thumbnail.jpg')}}">
+                </div>
                 <div class="w-[100%] mt-[10px]">
                     <h1 class="font-bold text-[17px]">{{articles[articles|length-3].title}}</h1>
-                    <p class="text-[14px]">{{articles[articles|length-3].author}} - {{articles[articles|length-3].type}}</p>
+                    <p class="text-[14px]">{{articles[articles|length-3].author}} - {{articles[articles|length-3].uploaded}}</p>
                 </div>
             </a>
 
             <a href="{{articles[articles|length-4].directory}}">
-                <img class="w-[100%] aspect-video" src="{{url_for('static', filename='articles'+articles[articles|length-4].directory+'/thumbnail.jpg')}}">
+                <div class="w-[100%] aspect-video overflow-hidden">
+                    <img class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all" 
+                    src="{{url_for('static', filename='articles'+articles[articles|length-4].directory+'/thumbnail.jpg')}}">
+                </div>
                 <div class="w-[100%] mt-[10px]">
                     <h1 class="font-bold text-[17px]">{{articles[articles|length-4].title}}</h1>
-                    <p class="text-[14px]">{{articles[articles|length-4].author}} - {{articles[articles|length-4].type}}</p>
+                    <p class="text-[14px]">{{articles[articles|length-4].author}} - {{articles[articles|length-4].uploaded}}</p>
                 </div>
             </a>
         </div>
@@ -46,11 +58,14 @@
         <div class="hidden mini:block small:block w-[calc(100%-20px)] ml-[10px]">
             {% for i in range(articles|length-1) %}
                 <a href="{{articles[articles|length-(i+2)].directory}}" class="w-[100%] grid grid-cols-[40%_auto] mt-[10px]">
-                    <img class="aspect-video" src="{{url_for('static', filename='articles'+articles[articles|length-(i+2)].directory+'/thumbnail.jpg')}}"></img>
+                    <div class="w-[100%] aspect-video overflow-hidden">
+                        <img class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all" 
+                        src="{{url_for('static', filename='articles'+articles[articles|length-(i+2)].directory+'/thumbnail.jpg')}}"></img>
+                    </div>
                     <div class="mt-0 ml-[10px] flex items-center">
                         <div>
                             <h1 class="font-bold text-[19px] mini:text-[13px]">{{articles[articles|length-(i+2)].title}}</h1>
-                            <p class="text-[15px] mini:text-[11px]">{{articles[articles|length-(i+2)].author}} - {{articles[articles|length-(i+2)].type}}</p>
+                            <p class="text-[15px] mini:text-[11px]">{{articles[articles|length-(i+2)].author}} - {{articles[articles|length-(i+2)].uploaded}}</p>
                         </div>
                     </div>
                 </a>

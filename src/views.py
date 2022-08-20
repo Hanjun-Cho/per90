@@ -9,10 +9,10 @@ def home():
     articles = Articles.query.all()
     return render_template('home.html', articles=articles)
 
-@views.route('/<type>/<team>/<name>')
-def article(team, type, name):
+@views.route('/<type>/<year>/<month>/<day>/<title>')
+def article(type, year, month, day, title):
     cpath = os.path.dirname(os.path.realpath(__file__))
-    spath = url_for('static', filename='articles/'+type+'/'+team+'/'+name)
+    spath = url_for('static', filename='articles/'+type+'/'+year+'/'+month+'/'+day+'/'+title)
     path = cpath + spath + '/article.html'
 
     f = open(path, 'r')
@@ -24,10 +24,11 @@ def article(team, type, name):
     meta = f.read()
     f.close()
 
-    directory = '/'+type+'/'+team+'/'+name
+    directory = '/'+type+'/'+year+'/'+month+'/'+day+'/'+title
     article = Articles.query.filter_by(directory=directory).first()
     article.views += 1
     db.session.commit()
+
     return render_template('article.html', content=content, meta=meta, title=article.title, author=article.author)
 
 @views.route('/player-analysis')
