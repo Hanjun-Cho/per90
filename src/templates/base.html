@@ -9,6 +9,8 @@
         {% block meta %}{% endblock %}
     </head>
     <body>
+        <div class="flex justify-center w-full mt-[50px] text-[19px] small:text-[17px] mini:text-[15px]">{% block content %}{% endblock %}</div>
+
         <div class="w-full h-[50px] bg-black flex text-white font-mont fixed top-0">
             <div class="w-[800px] grid grid-cols-[150px_auto] mini:hidden small:hidden">
                 <a href="/" class="flex justify-center items-center">
@@ -54,8 +56,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="flex justify-center w-full mt-[50px] text-[19px] small:text-[17px] mini:text-[15px]">{% block content %}{% endblock %}</div>
 
         <div class="w-[100%] h-[50px] bg-black text-white fixed bottom-0">
             <div class="w-[100%] h-[100%] flex justify-center">
