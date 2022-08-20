@@ -4,6 +4,11 @@ import os
 from . import db
 views = Blueprint('views', __name__)
 
+@views.route('/')
+def home():
+    articles = Articles.query.all()
+    return render_template('home.html', articles=articles)
+
 @views.route('/<type>/<team>/<name>')
 def article(team, type, name):
     cpath = os.path.dirname(os.path.realpath(__file__))
