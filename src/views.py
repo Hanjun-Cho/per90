@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, url_for
+from flask_login import login_required
 from .model import Articles
 import os
 from . import db
@@ -40,3 +41,8 @@ def player_analysis():
 def match_analysis():
     articles = Articles.query.all()
     return render_template('home.html', articles=articles)
+
+@views.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html')

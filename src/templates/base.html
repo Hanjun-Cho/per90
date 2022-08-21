@@ -5,38 +5,92 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{url_for('static', filename='css/output.css')}}">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3730842543816100" crossorigin="anonymous"></script>
+        <script src="{{url_for('static', filename='jquery.js')}}"></script>
         <title>{% block title %}{% endblock %}</title>
         {% block meta %}{% endblock %}
     </head>
     <body>
-        <div class="flex justify-center w-full mt-[50px] text-[19px] small:text-[17px] mini:text-[15px]">{% block content %}{% endblock %}</div>
+        <div class="w-[100%] h-[50px] bg-black text-white fixed bottom-0">
+            <div class="w-[100%] h-[100%] flex justify-center">
+                <div class="w-[800px] small:w-[100%] flex justify-center items-center">
+                </div>
+            </div>
+        </div>
 
-        <div class="w-full h-[50px] bg-black flex text-white font-mont fixed top-0">
-            <div class="w-[800px] grid grid-cols-[150px_auto] mini:hidden small:hidden">
-                <a href="/" class="flex justify-center items-center">
+        <div class="flex justify-center w-full mt-[50px] text-[19px] small:text-[17px] mini:text-[15px]">{% block content %}{% endblock %}</div>
+        
+        <div id="cover" class="w-[100%] h-full fixed top-0 bg-black/60"></div>
+
+        <div id="navbar" class="w-full large:justify-center h-[50px] bg-black flex text-white fixed top-0">
+            <div class="w-[800px] grid grid-cols-[150px_auto] mini:hidden small:hidden font-mont">
+                <a href="/" class="flex justify-center items-center bg-white/10">
                     <h1 class="font-bold text-[23px] pt-[3px]">
-                        <span class="text-blue">PER</span>90
+                        <span class="text-blue">PER-</span>90
                     </h1>
                 </a>
-
+                
                 <div class="grid grid-cols-5">
                     <a href="/" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
                         <h1 class="font-bold text-[13px] pt-[3px]">
                             ALL
                         </h1>
                     </a>
-
+                    
                     <a href="/player-analysis" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
                         <h1 class="font-bold text-[13px] pt-[3px]">
                             SCOUTING
                         </h1>
                     </a>
-
+                    
                     <a href="/match-analysis" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
                         <h1 class="font-bold text-[13px] pt-[3px]">
                             ANALYSIS
                         </h1>
                     </a>
+                </div>
+            </div>
+
+            <div class="relative w-[50px] h-[50px] block small:hidden mini:hidden flex justify-center items-center">
+                {% if current_user.is_authenticated %}
+                <a href="/profile" class="cursor-pointer w-[35px] aspect-square flex justify-center items-center">
+                    <div class="w-[35px] aspect-square bg-white rounded-full flex justify-center items-center">  
+                        <h1 class="text-black font-bold">{{current_user.username[:2]|upper}}</h1>
+                    </div>
+                </a>
+                {% else %}
+                <a onclick="profile()" class="cursor-pointer w-[35px] aspect-square flex justify-center">
+                    <div class="w-[35px] aspect-square bg-white flex justify-center items-center rounded-full">  
+                        <img src="{{url_for('static', filename='img/icons/profile.png')}}" class="w-[80%] h-[80%] mt-[10px]">
+                    </div>
+                </a>
+                {% endif %}
+            </div>
+            
+            <div class="w-[100%] h-0 mt-[60px] flex justify-center absolute">
+                <div id="account_popup" class="w-[400px] pb-[30px] m-auto bg-white border-[1px] rounded-[5px] border-black grid grid-rows-[50px_auto]">
+                    <div class="bg-black flex justify-center items-center font-mont">
+                        <h1 class="font-bold text-[23px] pt-[3px]">
+                            <span class="text-blue">PER-</span>90
+                        </h1>
+                    </div>
+                    <div class="flex justify-center text-black font-normal">
+                        <div class="flex justify-center w-[300px]">
+                            <div>
+                                <h1 class="mt-[20px] text-center">Sign up or Login to comment on articles</h1>
+                                
+                                <input type="text" id="email" placeholder="Enter email address" class="rounded-[5px] h-[35px] pl-[10px] border-[1px] border-black w-[100%] mt-[10px]">
+                                
+                                <div id="signup_elements" class="w-[300px]">
+                                    <input type="text" id="username" placeholder="Enter username" class="rounded-[5px] h-[35px] pl-[10px] border-[1px] border-black w-[100%] mt-[10px]">
+                                </div>
+                                
+                                <input type="password" id="password" placeholder="Enter password" class="rounded-[5px] h-[35px] pl-[10px] border-[1px] border-black w-[100%] mt-[10px]">
+                                <button onclick="signup()" id="signup_button" class="w-[300px] h-[35px] bg-blue mt-[10px] rounded-[5px] font-bold text-[14px]">SIGNUP</button>
+                                <button onclick="login()" id="login_button" class="w-[300px] h-[35px] bg-blue mt-[10px] rounded-[5px] font-bold text-[14px]">LOGIN</button>
+                                <p id="error" class="mt-[5px] text-red">error message</p>
+                            </div>
+                        </div>  
+                    </div>
                 </div>
             </div>
             
@@ -45,7 +99,7 @@
                     <img src="{{url_for('static', filename='img/icons/menu.png')}}" class="w-[45%] h-[45%]">
                 </div>
             </div>
-
+            
             <div class="w-[100%] h-[100%] hidden mini:block small:block absolute">
                 <div class="w-[100%] h-[100%] flex justify-center">
                     <div class="w-[150px] flex justify-center items-center">
@@ -56,17 +110,77 @@
                 </div>
             </div>
         </div>
-
-        <div class="w-[100%] h-[50px] bg-black text-white fixed bottom-0">
-            <div class="w-[100%] h-[100%] flex justify-center">
-                <div class="w-[800px] small:w-[100%] flex justify-center items-center">
-                    <div class="font-mont">
-                        <h1 class="font-bold text-[23px] pt-[3px] text-center">
-                            <span class="text-blue">PER</span>90
-                        </h1>
-                    </div>
-                </div>
-            </div>
-        </div>
     </body>
+
+    <script>
+        $(document).on('click', function(event) {
+            if(!$(event.target).closest('#account_popup').length && !$(event.target).closest('#navbar').length) {
+                if(document.getElementById('account_popup').style.display !== 'none') {
+                    document.getElementById('account_popup').style.display = 'none';
+                    document.getElementById('cover').style.display = 'none';
+                }
+            }
+        });
+
+        document.getElementById('cover').style.display = 'none';
+        document.getElementById('account_popup').style.display = 'none';
+        var signup_button = document.getElementById('signup_button');
+        var login_button = document.getElementById('login_button');
+        login_button.style.display = 'none';
+        var signup_elements = document.getElementById('signup_elements');
+
+        var error = document.getElementById('error');
+        error.style.display = 'none';
+
+        function profile() {
+            document.getElementById('cover').style.display = '';
+            document.getElementById('account_popup').style.display = '';
+        }
+
+        function signup() {
+            fetch(`/signup?data=${document.getElementById('email').value},${document.getElementById('username').value},${document.getElementById('password').value},`).then((response) => {
+                response.json().then((data) =>{
+                    if(data[0][0] === 'error') {
+                        error.innerHTML = data[0][1];
+                        error.style.display = '';
+                    }
+                    else {
+                        window.location.reload();
+                    }
+                })
+            })
+        }
+
+        function login() {
+            fetch(`/login?data=${document.getElementById('email').value},${document.getElementById('password').value},`).then((response) => {
+                response.json().then((data) =>{
+                    console.log(data);
+                    if(data[0][0] === 'error') {
+                        error.innerHTML = data[0][1];
+                        error.style.display = '';
+                    }
+                    else {
+                        window.location.reload();
+                    }
+                })
+            })
+        }
+
+        $('#email').on("input", function() {
+            fetch(`/check_email?email=${document.getElementById('email').value}`).then((response) => {
+                response.json().then((data) =>{
+                    if(data[0] === "exists") {
+                        signup_button.style.display = 'none';
+                        signup_elements.style.display = 'none';
+                        login_button.style.display = '';
+                    }
+                    else {
+                        signup_button.style.display = '';
+                        signup_elements.style.display = '';
+                        login_button.style.display = 'none';
+                    }
+                })
+            })
+        });
+    </script>
 </html>
