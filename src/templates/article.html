@@ -9,49 +9,82 @@
         <h1 class="text-[40px] mini:text-[30px] font-bold">{{title}}</h1>
         <p class="mt-[10px] text-[15px] mini:text-[13px]">Written by: {{author}}</p>
     </div>
-    <div class="mt-[10px]">{{content | safe}}</div>
+    <div class="mt-[10px] text-[18px]">{{content | safe}}</div>
+    <div id="comments"></div>
 
-    <div id="comments" class="w-[100%] pb-[20px] mt-[100px]">
-        <div class="w-[100%] grid grid-cols-[75px_auto_45px]">
+    <div class="w-[100%] pb-[20px] mt-[100px]">
+        <p id="reply_parent" class="text-[15px] ml-[75px]">replying to 
+            <span id="reply" class="font-bold"></span>
+            <a onclick="cancel_reply()" class="cursor-pointer"><span class="text-red font-bold">cancel</span></a>
+        </p>
+        <p id="reply_content" class="ml-[75px] text-[15px] w-[calc(100%-75px)]">alsdkjgalskbjaslkdjbasd</p>
+        <div class="w-[100%] grid grid-cols-[75px_auto_45px] mt-[5px]">
             <div class="flex justify-center items-center">
                 {% if current_user.is_authenticated %}
                 <div class="w-[50px] aspect-square bg-white border-[1px] border-black rounded-full flex justify-center items-center">  
                     <h1 class="text-black font-bold pr-[1px] text-[25px]">{{current_user.username[:2]|upper}}</h1>
                 </div>
                 {% else %}
-
+                <div class="w-[50px] aspect-square border-[1px] border-black bg-white flex justify-center items-center rounded-full">  
+                    <img src="{{url_for('static', filename='img/icons/profile.png')}}" class="rounded-full w-[87%] h-[80%] mt-[10px]">
+                </div>
                 {% endif %}
             </div>
             <div class="flex items-center">
                 <input type="text" name="content" id="content" placeholder="enter comment" class="border-b-[1px] w-[100%] h-[45px] bg-black/5 outline-none border-black pl-[10px] text-[17px]">
             </div>
             <div class="flex justify-center items-center">
+                {% if current_user.is_authenticated %}
                 <a onclick="send_comment()" class="cursor-pointer"><div class="w-[45px] aspect-square bg-blue rounded-r-[5px] flex justify-center items-center">
                     <img src="{{url_for('static', filename='img/icons/send.png')}}" class="w-[40%] h-[40%]">
                 </div></a>
+                {% else %}
+                <a onclick="profile()" class="cursor-pointer"><div class="w-[45px] aspect-square bg-blue rounded-r-[5px] flex justify-center items-center">
+                    <img src="{{url_for('static', filename='img/icons/send.png')}}" class="w-[40%] h-[40%]">
+                </div></a>
+                {% endif %}
             </div>
         </div>
 
         {% for i in comments %}
-            <div class="w-[100%] pt-[10px] pb-[10px] rounded-[5px] bg-black/5 grid grid-cols-[75px_auto] mt-[10px]">
+            <div class="w-[calc(100%-{{depth[i.key|string]*20}}px)] min-w-[100px] pt-[10px] pb-[10px] 
+            rounded-[5px] bg-black/5 grid grid-cols-[75px_auto] mt-[10px] max-ml-[700px] ml-[{{depth[i.key|string]*20}}px]">
                 <div class="flex justify-center h-[50px]">
                     <div class="w-[50px] aspect-square bg-white border-[1px] border-black rounded-full flex justify-center items-center">  
                         <h1 class="text-black font-bold pr-[1px] text-[25px] pb-[1px] text-center">{{i.sender[:2]|upper}}</h1>
                     </div>
                 </div>
-                <div class="grid grid-rows-[auto_30px]">
+                <div class="min-w-[100px] grid grid-rows-[auto_30px]">
                     <div>
-                        <p class="font-bold text-[15px]">{{i.sender}}</p>
-                        <p class="max-w-[100%]">{{i.content}}</p>
+                        <p id="{{i.key}} sender" class="font-bold text-[15px]">
+                            {{i.sender}}
+                            {% if i.parent|length != 0 %}
+                            <span class="font-normal">replying to</span> {{comments_dict[i.parent|string].sender}}
+                            {% endif %}
+                        </p>
+                        <p id="{{i.key}} content" class="max-w-[100%] pr-[10px]">{{i.content}}</p>
                     </div>
                     <div class="mt-[5px]">
-                        <div class="w-[10px] h-[100%]">
-                            <div class="w-[80px] h-[100%] grid grid-cols-[30px_auto] rounded-[5px] bg-black/10">
-                                <div class="flex justify-center items-center">
-                                    <img src="{{url_for('static', filename='img/icons/reply.png')}}" class="w-[50%] h-[50%]">
+                        <div class="h-[100%]">
+                            {% if current_user.is_authenticated %}
+                            <a id="{{i.key}}" onclick="reply_to(event)" class="h-[100%]">
+                                <div class="w-[80px] h-[100%] grid grid-cols-[30px_auto] rounded-[5px] bg-black/10 cursor-pointer">
+                                    <div id="{{i.key}}" class="flex justify-center items-center">
+                                        <img id="{{i.key}}" src="{{url_for('static', filename='img/icons/reply.png')}}" class="w-[40%] h-[40%]">
+                                    </div>
+                                    <p id="{{i.key}}" class="text-[15px]">reply</p>
                                 </div>
-                                <p class="text-[15px]">reply</p>
-                            </div>
+                            </a>
+                            {% else %}
+                            <a id="{{i.key}}" onclick="" class="h-[100%]">
+                                <div class="w-[81px] h-[100%] grid grid-cols-[30px_50px] cursor-pointer rounded-[5px] bg-black/10">
+                                    <div id="{{i.key}}" class="flex justify-center items-center">
+                                        <img id="{{i.key}}" src="{{url_for('static', filename='img/icons/reply.png')}}" class="w-[40%] h-[40%]">
+                                    </div>
+                                    <p id="{{i.key}}" class="text-[15px]">reply</p>
+                                </div>
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -60,10 +93,32 @@
     </div>
 
     <form id="comment_form" action="/make_comment" method="post">
+        <input type="text" name="parent" id="parent" value="">
         <input type="text" name="title" id="title" value="{{title}}">
         <input type="text" name="content" id="content_form" value="">
     </form>
 </div>
+
+<script>
+document.getElementById('reply_parent').style.display = 'none';
+document.getElementById('reply_content').style.display = 'none';
+
+function reply_to(e) {
+    console.log(e.target.id);
+    document.getElementById('parent').value = e.target.id;
+    document.getElementById('reply_parent').style.display = '';
+    document.getElementById('reply_content').style.display = '';
+    document.getElementById('reply_content').innerHTML = document.getElementById(e.target.id + ' content').innerHTML;
+    document.getElementById('reply').innerHTML = document.getElementById(e.target.id + ' sender').innerHTML;
+    $("html, body").animate({ scrollTop: $("#comments").offset().top }, 0);
+}
+
+function cancel_reply() {
+    document.getElementById('reply_parent').style.display = 'none';
+    document.getElementById('reply_content').style.display = 'none';
+    document.getElementById('parent').value = '';
+}
+</script>
 
 <script>
 var content = document.getElementById('content');

@@ -25,13 +25,17 @@ def article(type, year, month, day, title):
     meta = f.read()
     f.close()
 
-
     directory = '/'+type+'/'+year+'/'+month+'/'+day+'/'+title
-    comments = get_comments(directory)
+    ret = get_comments(directory)
+    comments = ret[0]
+    comments_dict = ret[1]
+    depth = ret[2]
     article = Articles.query.filter_by(directory=directory).first()
     article.views += 1
     db.session.commit()
-    return render_template('article.html', content=content, meta=meta, title=article.title, author=article.author, commented=False, comments=comments)
+    return render_template('article.html', content=content, meta=meta, title=article.title, 
+    author=article.author, commented=False, comments=comments, comments_dict=comments_dict
+    , depth=depth)
 
 @views.route('/<type>/<year>/<month>/<day>/<title>#comments')
 def comment_article(type, year, month, day, title):
@@ -49,19 +53,42 @@ def comment_article(type, year, month, day, title):
     f.close()
 
     directory = '/'+type+'/'+year+'/'+month+'/'+day+'/'+title
-    comments = get_comments(directory)
+    ret = get_comments(directory)
+    comments = ret[0]
+    comments_dict = ret[1]
+    depth = ret[2]
     article = Articles.query.filter_by(directory=directory).first()
     article.views += 1
     db.session.commit()
-    return render_template('article.html', content=content, meta=meta, title=article.title, author=article.author, commented=True, comments=comments)
+    return render_template('article.html', content=content, meta=meta, title=article.title,
+    author=article.author, commented=True, comments=comments, comments_dict=comments_dict
+    , depth=depth)
 
 def get_comments(directory):
     comments = Comments.query.filter_by(article=directory).all()
-    
-    for i in comments:
-        print(i.sender + ', ' + i.content)
+    comments_dict = {}
+    d = {}
+    ret = []
+    v = set()
 
-    return comments[::-1]
+    for i in comments[::-1]:
+        if len(i.parent) == 0:
+            dfs_comments(i.key, v, ret, comments_dict, 0, d)
+    return [ret,comments_dict, d]
+
+def dfs_comments(key, v, ret, comments_dict, depth, d):
+    if(key in v):
+        return 
+    ret.append(Comments.query.filter_by(key=key).first())
+    comments_dict[str(key)] = Comments.query.filter_by(key=key).first()
+    d[str(key)] = depth
+
+    comments = Comments.query.filter_by(parent=key).all()
+
+    for i in comments:
+        dfs_comments(i.key, v, ret, comments_dict, depth+1, d)
+    
+    return ret
 
 @views.route('/player-analysis')
 def player_analysis():

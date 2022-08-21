@@ -10,8 +10,9 @@ comments = Blueprint('comments', __name__)
 def make_comment():
     title = request.form.get('title')
     content = request.form.get('content')
+    parent = request.form.get('parent')
     article = Articles.query.filter_by(title=title).first()
-    comment = Comments(sender=current_user.username, article=article.directory, content=content)
+    comment = Comments(sender=current_user.username, article=article.directory, parent=parent, content=content)
     db.session.add(comment)
 
     split = article.directory.split('/')

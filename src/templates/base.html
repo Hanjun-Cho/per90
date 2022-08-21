@@ -112,75 +112,75 @@
         </div>
     </body>
 
-    <script>
-        $(document).on('click', function(event) {
-            if(!$(event.target).closest('#account_popup').length && !$(event.target).closest('#navbar').length) {
-                if(document.getElementById('account_popup').style.display !== 'none') {
-                    document.getElementById('account_popup').style.display = 'none';
-                    document.getElementById('cover').style.display = 'none';
-                }
-            }
-        });
-
-        document.getElementById('cover').style.display = 'none';
-        document.getElementById('account_popup').style.display = 'none';
-        var signup_button = document.getElementById('signup_button');
-        var login_button = document.getElementById('login_button');
-        login_button.style.display = 'none';
-        var signup_elements = document.getElementById('signup_elements');
-
-        var error = document.getElementById('error');
-        error.style.display = 'none';
-
-        function profile() {
-            document.getElementById('cover').style.display = '';
-            document.getElementById('account_popup').style.display = '';
-        }
-
-        function signup() {
-            fetch(`/signup?data=${document.getElementById('email').value},${document.getElementById('username').value},${document.getElementById('password').value},`).then((response) => {
-                response.json().then((data) =>{
-                    if(data[0][0] === 'error') {
-                        error.innerHTML = data[0][1];
-                        error.style.display = '';
-                    }
-                    else {
-                        window.location.reload();
-                    }
-                })
-            })
-        }
-
-        function login() {
-            fetch(`/login?data=${document.getElementById('email').value},${document.getElementById('password').value},`).then((response) => {
-                response.json().then((data) =>{
-                    console.log(data);
-                    if(data[0][0] === 'error') {
-                        error.innerHTML = data[0][1];
-                        error.style.display = '';
-                    }
-                    else {
-                        window.location.reload();
-                    }
-                })
-            })
-        }
-
-        $('#email').on("input", function() {
-            fetch(`/check_email?email=${document.getElementById('email').value}`).then((response) => {
-                response.json().then((data) =>{
-                    if(data[0] === "exists") {
-                        signup_button.style.display = 'none';
-                        signup_elements.style.display = 'none';
-                        login_button.style.display = '';
-                    }
-                    else {
-                        signup_button.style.display = '';
-                        signup_elements.style.display = '';
-                        login_button.style.display = 'none';
-                    }
-                })
-            })
-        });
-    </script>
 </html>
+<script>
+$(document).on('click', function(event) {
+    if(!$(event.target).closest('#account_popup').length && !$(event.target).closest('#navbar').length) {
+        if(document.getElementById('account_popup').style.display !== 'none') {
+            document.getElementById('account_popup').style.display = 'none';
+            document.getElementById('cover').style.display = 'none';
+        }
+    }
+});
+
+document.getElementById('cover').style.display = 'none';
+document.getElementById('account_popup').style.display = 'none';
+var signup_button = document.getElementById('signup_button');
+var login_button = document.getElementById('login_button');
+login_button.style.display = 'none';
+var signup_elements = document.getElementById('signup_elements');
+
+var error = document.getElementById('error');
+error.style.display = 'none';
+
+function profile() {
+    document.getElementById('cover').style.display = '';
+    document.getElementById('account_popup').style.display = '';
+}
+
+function signup() {
+    fetch(`/signup?data=${document.getElementById('email').value},${document.getElementById('username').value},${document.getElementById('password').value},`).then((response) => {
+        response.json().then((data) =>{
+            if(data[0][0] === 'error') {
+                error.innerHTML = data[0][1];
+                error.style.display = '';
+            }
+            else {
+                window.location.reload();
+            }
+        })
+    })
+}
+
+function login() {
+    fetch(`/login?data=${document.getElementById('email').value},${document.getElementById('password').value},`).then((response) => {
+        response.json().then((data) =>{
+            console.log(data);
+            if(data[0][0] === 'error') {
+                error.innerHTML = data[0][1];
+                error.style.display = '';
+            }
+            else {
+                window.location.reload();
+            }
+        })
+    })
+}
+
+$('#email').on("input", function() {
+    fetch(`/check_email?email=${document.getElementById('email').value}`).then((response) => {
+        response.json().then((data) =>{
+            if(data[0] === "exists") {
+                signup_button.style.display = 'none';
+                signup_elements.style.display = 'none';
+                login_button.style.display = '';
+            }
+            else {
+                signup_button.style.display = '';
+                signup_elements.style.display = '';
+                login_button.style.display = 'none';
+            }
+        })
+    })
+});
+</script>
