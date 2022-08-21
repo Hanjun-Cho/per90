@@ -41,9 +41,9 @@
             </div>
             <div class="flex justify-center items-center">
                 {% if current_user.is_authenticated %}
-                <a onclick="send_comment()" class="cursor-pointer"><div class="w-[45px] aspect-square bg-blue rounded-r-[5px] flex justify-center items-center">
+                <button onclick="send_comment()" id="comment_button" class="cursor-pointer"><div class="w-[45px] aspect-square bg-blue rounded-r-[5px] flex justify-center items-center">
                     <img src="{{url_for('static', filename='img/icons/send.png')}}" class="w-[40%] h-[40%]">
-                </div></a>
+                </div></button>
                 {% else %}
                 <a class="cursor-pointer"><div class="w-[45px] aspect-square bg-blue rounded-r-[5px] flex justify-center items-center">
                     <img src="{{url_for('static', filename='img/icons/send.png')}}" class="w-[40%] h-[40%]">
@@ -132,6 +132,7 @@ function send_comment() {
     if(content.value.length > 0) {
         document.getElementById('content_form').value = content.value;
         document.getElementById('comment_form').submit();
+        document.getElementById('comment_button').disabled = true;
     }
 }
 </script>
