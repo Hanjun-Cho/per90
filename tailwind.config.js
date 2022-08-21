@@ -4,7 +4,9 @@ module.exports = {
     extend: {
       fontFamily: {
         mont: ["MONT", "sans-serif"],
-        modern_sans: ["MODERN_SANS", "sans-serif"]
+        modern_sans: ["MODERN_SANS", "sans-serif"],
+        gravity: ["GRAVITY", "sans-serif"],
+        gravity_bold: ["GRAVITY_BOLD", "sans-serif"]
       }
     },
     colors: {

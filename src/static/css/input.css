@@ -16,3 +16,13 @@
     font-family: "MODERN_SANS";
     src: url("../font/modern_sans.otf");
 }
+
+@font-face {
+    font-family: "GRAVITY";
+    src: url("../font/gravity.otf");
+}
+
+@font-face {
+    font-family: "GRAVITY_BOLD";
+    src: url("../font/gravity-bold.otf");
+}
