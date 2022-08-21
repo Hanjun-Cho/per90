@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="{{url_for('static', filename='css/output.css')}}">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3730842543816100" crossorigin="anonymous"></script>
         <script src="{{url_for('static', filename='jquery.js')}}"></script>
+        <script src="{{url_for('static', filename='main.js')}}"></script>
         <title>{% block title %}{% endblock %}</title>
         {% block meta %}{% endblock %}
     </head>
@@ -16,8 +17,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="flex justify-center w-full mt-[50px] text-[19px] small:text-[17px] mini:text-[15px]">{% block content %}{% endblock %}</div>
         
         <div id="cover" class="w-[100%] h-full fixed top-0 bg-black/60"></div>
 
@@ -93,6 +92,7 @@
                     </div>
                 </div>
             </div>
+
             
             <div class="w-[50px] h-[100%] hidden mini:block small:block">
                 <div class="h-[100%] flex justify-center items-center">
@@ -110,8 +110,8 @@
                 </div>
             </div>
         </div>
+        <div class="flex justify-center w-full mt-[50px] text-[19px] small:text-[17px] mini:text-[15px]">{% block content %}{% endblock %}</div>
     </body>
-
 </html>
 <script>
 $(document).on('click', function(event) {

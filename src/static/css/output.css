@@ -834,6 +834,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 700px;
 }
 
+.ml-\[15px\] {
+  margin-left: 15px;
+}
+
 .block {
   display: block;
 }

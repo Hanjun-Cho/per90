@@ -17,7 +17,7 @@
             <span id="reply" class="font-bold"></span>
             <a onclick="cancel_reply()" class="cursor-pointer"><span class="text-red font-bold">cancel</span></a>
         </p>
-        <p id="reply_content" class="ml-[75px] text-[15px] w-[calc(100%-75px)]">alsdkjgalskbjaslkdjbasd</p>
+        <p id="reply_content" class="ml-[75px] text-[15px] w-[calc(100%-75px)]"></p>
         <div class="w-[100%] grid grid-cols-[75px_auto_45px] mt-[5px]">
             <div class="flex justify-center items-center">
                 {% if current_user.is_authenticated %}
@@ -31,7 +31,13 @@
                 {% endif %}
             </div>
             <div class="flex items-center">
+                {% if current_user.is_authenticated %}
                 <input type="text" name="content" id="content" placeholder="enter comment" class="border-b-[1px] w-[100%] h-[45px] bg-black/5 outline-none border-black pl-[10px] text-[17px]">
+                {% else %}
+                <div class="w-[100%] h-[45px] border-black border-b-[1px] flex items-center bg-black/5">
+                    <p class="ml-[15px]">please signup or login to comment</p>
+                </div>
+                {% endif %}
             </div>
             <div class="flex justify-center items-center">
                 {% if current_user.is_authenticated %}
@@ -39,7 +45,7 @@
                     <img src="{{url_for('static', filename='img/icons/send.png')}}" class="w-[40%] h-[40%]">
                 </div></a>
                 {% else %}
-                <a onclick="profile()" class="cursor-pointer"><div class="w-[45px] aspect-square bg-blue rounded-r-[5px] flex justify-center items-center">
+                <a class="cursor-pointer"><div class="w-[45px] aspect-square bg-blue rounded-r-[5px] flex justify-center items-center">
                     <img src="{{url_for('static', filename='img/icons/send.png')}}" class="w-[40%] h-[40%]">
                 </div></a>
                 {% endif %}
@@ -76,7 +82,7 @@
                                 </div>
                             </a>
                             {% else %}
-                            <a id="{{i.key}}" onclick="" class="h-[100%]">
+                            <a id="{{i.key}}" class="h-[100%]">
                                 <div class="w-[81px] h-[100%] grid grid-cols-[30px_50px] cursor-pointer rounded-[5px] bg-black/10">
                                     <div id="{{i.key}}" class="flex justify-center items-center">
                                         <img id="{{i.key}}" src="{{url_for('static', filename='img/icons/reply.png')}}" class="w-[40%] h-[40%]">
