@@ -6,7 +6,6 @@ from . import db
 backend = Blueprint('backend', __name__)
 
 @backend.route('/add_article', methods=['GET', 'POST'])
-@login_required
 def add_article():
     if current_user.username == "admin":
         if request.method == 'POST':
