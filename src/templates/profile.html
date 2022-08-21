@@ -2,20 +2,20 @@
 {% block title %} Profile | Per-90 {% endblock %}
 {% block content %}
 <div class="w-[800px] small:w-[100%] mini:w-[100%] flex justify-center">
-    <div class="w-[506px]">
-        <h1 class="font-bold text-[30px] mt-[30px] w-[505px] text-center">{{current_user.username|upper}} PROFILE</h1>
+    <div class="w-[506px] small:w-[300px] mini:w-[300px]">
+        <h1 class="font-bold text-[30px] mt-[30px] w-[100%] text-center">{{current_user.username|upper}} PROFILE</h1>
 
         <div class="mt-[20px]">
-            <input type="text" id="email_profile" value="{{current_user.email}}" placeholder="Enter email address" class="w-[505px] rounded-[5px] pl-[10px] h-[45px] border-[1px] border-black">
-            <input type="text" id="username_profile" value="{{current_user.username}}" placeholder="Enter username" class="w-[505px] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
-            <input type="password" id="password_profile" placeholder="Change Password" class="w-[505px] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
-            <input type="password" id="password_conf_profile" placeholder="Confirm New Password" class="w-[505px] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
+            <input type="text" id="email_profile" value="{{current_user.email}}" placeholder="Enter email address" class="w-[100%] rounded-[5px] pl-[10px] h-[45px] border-[1px] border-black">
+            <input type="text" id="username_profile" value="{{current_user.username}}" placeholder="Enter username" class="w-[100%] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
+            <input type="password" id="password_profile" placeholder="Change Password" class="w-[100%] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
+            <input type="password" id="password_conf_profile" placeholder="Confirm New Password" class="w-[100%] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
         </div>
 
         <div class="mt-[5px]">
-            <button onclick="save_account()" class="bg-blue w-[505px] pt-[5px] pb-[5px] rounded-[5px] font-bold text-[15px]">Save Account</button>
-            <a href="/logout"><button class="bg-red w-[250px] pt-[5px] pb-[5px] rounded-[5px] font-bold text-[15px] mt-[5px]">Logout</button></a>
-            <a href="/delete_account"><button class="bg-red w-[250px] pt-[5px] pb-[5px] rounded-[5px] font-bold text-[15px]">Delete Account</button></a>
+            <button onclick="save_account()" class="bg-blue w-[100%] pt-[5px] pb-[5px] rounded-[5px] font-bold text-[15px]">Save Account</button>
+            <a href="/logout"><button class="bg-red w-[100%] pt-[5px] pb-[5px] rounded-[5px] font-bold text-[15px] mt-[5px]">Logout</button></a>
+            <a href="/delete_account"><button class="bg-red w-[100%] pt-[5px] pb-[5px] mt-[5px] rounded-[5px] font-bold text-[15px]">Delete Account</button></a>
         </div>
 
         <p class="text-[17px] text-red mt-[5px]" id="error"></p>

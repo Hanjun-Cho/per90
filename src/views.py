@@ -81,7 +81,7 @@ def dfs_comments(key, v, ret, comments_dict, depth, d):
         return 
     ret.append(Comments.query.filter_by(key=key).first())
     comments_dict[str(key)] = Comments.query.filter_by(key=key).first()
-    d[str(key)] = depth
+    d[str(key)] = min(6, depth)
 
     comments = Comments.query.filter_by(parent=key).all()
 

@@ -26,7 +26,7 @@ def signup():
             res = make_response(jsonify(['error', 'password too short (at 8 characters)'], 200))
             return res
 
-        user = Users.query.filter_by(email=email).first()
+        user = Users.query.filter_by(email=email.lower()).first()
 
         if user is not None:
             res = make_response(jsonify(['error', 'user with email already exists'], 200))
@@ -42,7 +42,7 @@ def signup():
                 user = Users(email=email, username=username, password=hash)
                 db.session.add(user)
                 db.session.commit()
-                login_user(user)
+                login_user(Users.query.filter_by(username=username, email=email.lower()).first())
                 res = make_response(jsonify(['success', 'account created successfully'], 200))
                 return res
     return res
@@ -63,7 +63,7 @@ def login():
             res = make_response(jsonify(['error', 'password too short'], 200))
             return res
         
-        user = Users.query.filter_by(email=email).first()
+        user = Users.query.filter_by(email=email.lower()).first()
 
         if user is None:
             res = make_response(jsonify(['error', 'email doesnt exist'], 200))
@@ -87,7 +87,7 @@ def logout():
 def check_email():
     if request.args:
         email = request.args.get("email")
-        user = Users.query.filter_by(email=email).first()
+        user = Users.query.filter_by(email=email.lower()).first()
 
         if user is not None:
             res = make_response(jsonify("exists", 200))
@@ -112,15 +112,15 @@ def save_account():
             res = make_response(jsonify(['error', 'email too short'], 200))
             return res
 
-        user = Users.query.filter_by(email=email).first()
+        user = Users.query.filter_by(email=email.lower()).first()
 
-        if email != current_user.email:
+        if email.lower() != current_user.email:
             if user is not None:
                 res = make_response(jsonify(['error', 'email already taken'], 200))
                 return res
             else:
                 cur_user = Users.query.filter_by(email=current_user.email).first()
-                cur_user.email = email
+                cur_user.email = email.lower()
                 db.session.commit()
 
         if username != current_user.username:
