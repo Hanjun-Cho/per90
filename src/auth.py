@@ -40,9 +40,9 @@ def signup():
             else:
                 hash = hashpw(password.encode(), gensalt())
                 user = Users(email=email, username=username, password=hash)
-                login_user(user)
                 db.session.add(user)
                 db.session.commit()
+                login_user(user)
                 res = make_response(jsonify(['success', 'account created successfully'], 200))
                 return res
     return res

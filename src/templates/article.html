@@ -11,8 +11,75 @@
     </div>
     <div class="mt-[10px]">{{content | safe}}</div>
 
-    <div class="w-[100%] h-[500px] bg-blue mt-[100px]">
-        
+    <div id="comments" class="w-[100%] pb-[20px] mt-[100px]">
+        <div class="w-[100%] grid grid-cols-[75px_auto_45px]">
+            <div class="flex justify-center items-center">
+                {% if current_user.is_authenticated %}
+                <div class="w-[50px] aspect-square bg-white border-[1px] border-black rounded-full flex justify-center items-center">  
+                    <h1 class="text-black font-bold pr-[1px] text-[25px]">{{current_user.username[:2]|upper}}</h1>
+                </div>
+                {% else %}
+
+                {% endif %}
+            </div>
+            <div class="flex items-center">
+                <input type="text" name="content" id="content" placeholder="enter comment" class="border-b-[1px] w-[100%] h-[45px] bg-black/5 outline-none border-black pl-[10px] text-[17px]">
+            </div>
+            <div class="flex justify-center items-center">
+                <a onclick="send_comment()" class="cursor-pointer"><div class="w-[45px] aspect-square bg-blue rounded-r-[5px] flex justify-center items-center">
+                    <img src="{{url_for('static', filename='img/icons/send.png')}}" class="w-[40%] h-[40%]">
+                </div></a>
+            </div>
+        </div>
+
+        {% for i in comments %}
+            <div class="w-[100%] pt-[10px] pb-[10px] rounded-[5px] bg-black/5 grid grid-cols-[75px_auto] mt-[10px]">
+                <div class="flex justify-center h-[50px]">
+                    <div class="w-[50px] aspect-square bg-white border-[1px] border-black rounded-full flex justify-center items-center">  
+                        <h1 class="text-black font-bold pr-[1px] text-[25px] pb-[1px] text-center">{{i.sender[:2]|upper}}</h1>
+                    </div>
+                </div>
+                <div class="grid grid-rows-[auto_30px]">
+                    <div>
+                        <p class="font-bold text-[15px]">{{i.sender}}</p>
+                        <p class="max-w-[100%]">{{i.content}}</p>
+                    </div>
+                    <div class="mt-[5px]">
+                        <div class="w-[10px] h-[100%]">
+                            <div class="w-[80px] h-[100%] grid grid-cols-[30px_auto] rounded-[5px] bg-black/10">
+                                <div class="flex justify-center items-center">
+                                    <img src="{{url_for('static', filename='img/icons/reply.png')}}" class="w-[50%] h-[50%]">
+                                </div>
+                                <p class="text-[15px]">reply</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
+
+    <form id="comment_form" action="/make_comment" method="post">
+        <input type="text" name="title" id="title" value="{{title}}">
+        <input type="text" name="content" id="content_form" value="">
+    </form>
 </div>
+
+<script>
+var content = document.getElementById('content');
+function send_comment() {
+    if(content.value.length > 0) {
+        document.getElementById('content_form').value = content.value;
+        document.getElementById('comment_form').submit();
+    }
+}
+</script>
+
+{% if commented %}
+<script>
+    $(function() {
+       $("html, body").animate({ scrollTop: $("#comments").offset().top }, 0);
+    });
+</script>
+{% endif %}
 {% endblock %}

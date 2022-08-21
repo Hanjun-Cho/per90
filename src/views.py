@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, url_for
 from flask_login import login_required
-from .model import Articles
+from .model import Articles, Comments
 import os
 from . import db
 views = Blueprint('views', __name__)
@@ -25,12 +25,43 @@ def article(type, year, month, day, title):
     meta = f.read()
     f.close()
 
+
     directory = '/'+type+'/'+year+'/'+month+'/'+day+'/'+title
+    comments = get_comments(directory)
     article = Articles.query.filter_by(directory=directory).first()
     article.views += 1
     db.session.commit()
+    return render_template('article.html', content=content, meta=meta, title=article.title, author=article.author, commented=False, comments=comments)
 
-    return render_template('article.html', content=content, meta=meta, title=article.title, author=article.author)
+@views.route('/<type>/<year>/<month>/<day>/<title>#comments')
+def comment_article(type, year, month, day, title):
+    cpath = os.path.dirname(os.path.realpath(__file__))
+    spath = url_for('static', filename='articles/'+type+'/'+year+'/'+month+'/'+day+'/'+title)
+    path = cpath + spath + '/article.html'
+
+    f = open(path, 'r')
+    content = f.read()
+    f.close()
+
+    path = cpath + spath + '/meta.html'
+    f = open(path, 'r')
+    meta = f.read()
+    f.close()
+
+    directory = '/'+type+'/'+year+'/'+month+'/'+day+'/'+title
+    comments = get_comments(directory)
+    article = Articles.query.filter_by(directory=directory).first()
+    article.views += 1
+    db.session.commit()
+    return render_template('article.html', content=content, meta=meta, title=article.title, author=article.author, commented=True, comments=comments)
+
+def get_comments(directory):
+    comments = Comments.query.filter_by(article=directory).all()
+    
+    for i in comments:
+        print(i.sender + ', ' + i.content)
+
+    return comments[::-1]
 
 @views.route('/player-analysis')
 def player_analysis():
