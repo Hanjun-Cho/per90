@@ -10,3 +10,9 @@
     font-family: "MONT";
     src: url("../font/mont.otf");
 }
+
+
+@font-face {
+    font-family: "MODERN_SANS";
+    src: url("../font/modern_sans.otf");
+}

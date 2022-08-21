@@ -10,7 +10,7 @@
         <title>{% block title %}{% endblock %}</title>
         {% block meta %}{% endblock %}
     </head>
-    <body>
+    <body class="font-modern_sans">
         <div id="cover" class="w-[100%] h-full fixed top-0 bg-black/60"></div>
 
         <div id="mobile_sidebar" class="w-[100%] h-[calc(100%-50px)] fixed bg-lighter-black grid grid-rows-[50px_50px_50px_50px] font-mont">
@@ -84,10 +84,18 @@
             
             <div class="w-[100%] h-0 mt-[60px] flex justify-center absolute">
                 <div id="account_popup" style="display:none;" class="w-[400px] mini:w-[300px] small:w-[300px] pb-[30px] m-auto bg-white border-[1px] rounded-[5px] border-black grid grid-rows-[50px_auto]">
-                    <div class="bg-black flex justify-center items-center font-mont">
-                        <h1 class="font-bold text-[23px] pt-[3px]">
-                            <span class="text-blue">PER-</span>90
-                        </h1>
+                    <div class="bg-black font-mont grid grid-cols-[50px_auto_50px]">
+                        <div></div>
+                        <div class="flex justify-center items-center">
+                            <h1 class="font-bold text-[23px] pt-[3px]">
+                                <span class="text-blue">PER-</span>90
+                            </h1>
+                        </div>
+                        <a onclick="close_profile()" class="cursor-pointer flex justify-center items-center">
+                            <div class="w-[50px] aspect-square flex justify-center items-center rounded-full">  
+                                <img src="{{url_for('static', filename='img/icons/close.png')}}" class="w-[40%] h-[40%]">
+                            </div>
+                        </a>
                     </div>
                     <div class="flex justify-center text-black font-normal">
                         <div class="flex justify-center w-[300px] mini:w-[240px] small:w-[240px]">
@@ -165,6 +173,11 @@ function profile() {
     document.getElementById('mobile_sidebar').style.display = 'none';
     document.getElementById('cover').style.display = '';
     document.getElementById('account_popup').style.display = '';
+}
+
+function close_profile() {
+    document.getElementById('cover').style.display = 'none';
+    document.getElementById('account_popup').style.display = 'none';
 }
 
 function signup() {

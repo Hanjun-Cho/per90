@@ -3,7 +3,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mont: ["MONT", "sans-serif"]
+        mont: ["MONT", "sans-serif"],
+        modern_sans: ["MODERN_SANS", "sans-serif"]
       }
     },
     colors: {

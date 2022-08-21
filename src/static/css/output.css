@@ -786,46 +786,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 600px;
 }
 
-.ml-\[610px\] {
-  margin-left: 610px;
-}
-
-.ml-\[620px\] {
-  margin-left: 620px;
-}
-
-.ml-\[630px\] {
-  margin-left: 630px;
-}
-
-.ml-\[640px\] {
-  margin-left: 640px;
-}
-
-.ml-\[650px\] {
-  margin-left: 650px;
-}
-
-.ml-\[660px\] {
-  margin-left: 660px;
-}
-
-.ml-\[670px\] {
-  margin-left: 670px;
-}
-
-.ml-\[680px\] {
-  margin-left: 680px;
-}
-
-.ml-\[690px\] {
-  margin-left: 690px;
-}
-
-.ml-\[700px\] {
-  margin-left: 700px;
-}
-
 .block {
   display: block;
 }
@@ -996,14 +956,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-\[506px\] {
   width: 506px;
-}
-
-.w-\[505px\] {
-  width: 505px;
-}
-
-.w-\[250px\] {
-  width: 250px;
 }
 
 .w-\[calc\(100\%-10px\)\] {
@@ -1282,16 +1234,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: calc(100% - 700px);
 }
 
-.w-\[calc\(100\%\/2\)\] {
-  width: calc(100% / 2);
-}
-
 .min-w-\[100px\] {
   min-width: 100px;
-}
-
-.min-w-\[200px\] {
-  min-width: 200px;
 }
 
 .max-w-\[100\%\] {
@@ -1346,16 +1290,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-rows: auto 30px;
 }
 
-.grid-rows-\[50px_50px_50px\] {
-  grid-template-rows: 50px 50px 50px;
+.grid-rows-\[50px_50px_50px_50px\] {
+  grid-template-rows: 50px 50px 50px 50px;
 }
 
 .grid-rows-\[50px_auto\] {
   grid-template-rows: 50px auto;
-}
-
-.grid-rows-\[50px_50px_50px_50px\] {
-  grid-template-rows: 50px 50px 50px 50px;
 }
 
 .items-end {
@@ -1480,8 +1420,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 5px;
 }
 
-.pb-\[70px\] {
-  padding-bottom: 70px;
+.pb-\[10px\] {
+  padding-bottom: 10px;
 }
 
 .pr-\[1px\] {
@@ -1494,10 +1434,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pt-\[10px\] {
   padding-top: 10px;
-}
-
-.pb-\[10px\] {
-  padding-bottom: 10px;
 }
 
 .pb-\[1px\] {
@@ -1530,6 +1466,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .font-mont {
   font-family: MONT, sans-serif;
+}
+
+.font-modern_sans {
+  font-family: MODERN_SANS, sans-serif;
 }
 
 .text-\[40px\] {
@@ -1673,6 +1613,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   src: url("../font/mont.otf");
 }
 
+@font-face {
+  font-family: "MODERN_SANS";
+
+  src: url("../font/modern_sans.otf");
+}
+
 .hover\:h-\[130\%\]:hover {
   height: 130%;
 }
@@ -1717,10 +1663,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 300px;
   }
 
-  .small\:w-\[280px\] {
-    width: 280px;
-  }
-
   .small\:w-\[240px\] {
     width: 240px;
   }
@@ -1745,10 +1687,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .mini\:w-\[300px\] {
     width: 300px;
-  }
-
-  .mini\:w-\[280px\] {
-    width: 280px;
   }
 
   .mini\:w-\[240px\] {
