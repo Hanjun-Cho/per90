@@ -6,10 +6,10 @@
         <h1 class="font-bold text-[30px] mt-[30px] w-[505px] text-center">{{current_user.username|upper}} PROFILE</h1>
 
         <div class="mt-[20px]">
-            <input type="text" id="email" value="{{current_user.email}}" placeholder="Enter email address" class="w-[505px] rounded-[5px] pl-[10px] h-[45px] border-[1px] border-black">
-            <input type="text" id="username" value="{{current_user.username}}" placeholder="Enter username" class="w-[505px] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
-            <input type="password" id="password" placeholder="Change Password" class="w-[505px] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
-            <input type="password" id="password_conf" placeholder="Confirm New Password" class="w-[505px] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
+            <input type="text" id="email_profile" value="{{current_user.email}}" placeholder="Enter email address" class="w-[505px] rounded-[5px] pl-[10px] h-[45px] border-[1px] border-black">
+            <input type="text" id="username_profile" value="{{current_user.username}}" placeholder="Enter username" class="w-[505px] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
+            <input type="password" id="password_profile" placeholder="Change Password" class="w-[505px] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
+            <input type="password" id="password_conf_profile" placeholder="Confirm New Password" class="w-[505px] rounded-[5px] mt-[5px] pl-[10px] h-[45px] border-[1px] border-black">
         </div>
 
         <div class="mt-[5px]">
@@ -27,7 +27,7 @@ var error = document.getElementById('error');
 error.style.display = 'none';
 
 function save_account() {
-    fetch(`/save_account?data=${document.getElementById('email').value},${document.getElementById('username').value},${document.getElementById('password').value},${document.getElementById('password_conf').value},`).then((response) => {
+    fetch(`/save_account?data=${document.getElementById('email_profile').value},${document.getElementById('username_profile').value},${document.getElementById('password_profile').value},${document.getElementById('password_conf_profile').value},`).then((response) => {
         response.json().then((data) =>{
             console.log(data);
             if(data[0][0] === 'error') {

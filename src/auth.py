@@ -150,7 +150,7 @@ def save_account():
             return res
         else:
             cur_user = Users.query.filter_by(email=current_user.email).first()
-            cur_user.password = hashpw(password, gensalt())
+            cur_user.password = hashpw(password.encode(), gensalt())
             db.session.commit()
             res = make_response(jsonify(['success', ''], 200))
             return res
