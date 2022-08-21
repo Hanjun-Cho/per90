@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %} Home | Per-90 {% endblock %}
+{% block content %}
+<div class="w-[800px] small:w-[100%] mini:w-[100%]">
+    <input type="text" id="title" name="title" placeholder="title" class="mt-[30px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
+    <input type="text" id="url_title" name="url_title" placeholder="url title" class="mt-[10px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
+    
+    <select name="type" id="type" class="mt-[10px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
+        <option value="player-analysis">Player Analysis</option>
+        <option value="match-analysis">Match Analysis</option>
+    </select>
+
+    <textarea name="description" placeholder="description" id="description" class="mt-[10px] pl-[15px] pr-[15px] pt-[5px] pb-[5px] w-[100%] border-[1px] border-black"></textarea>
+    
+    <select name="author" id="author" class="mt-[10px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
+        <option value="Hanjun Cho">Hanjun Cho</option>
+        <option value="Eric Kim">Eric Kim</option>
+        <option value="USAxSpurs">USAxSPURS</option>
+    </select>
+
+    <select name="year" id="year" class="mt-[10px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
+        <option value="2022">2022</option>
+    </select>
+
+    <select name="month" id="month" class="mt-[10px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+    </select>
+
+    <select name="day" id="day" class="mt-[10px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        <option value="04">4</option>
+        <option value="05">5</option>
+        <option value="06">6</option>
+        <option value="07">7</option>
+        <option value="08">8</option>
+        <option value="09">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+    </select>
+    <a onclick="post()"><button class="w-[100%] h-[45px] bg-black text-white font-bold mt-[10px]">Add Article</button></a>
+
+    <form id="form" class="hidden" action="/admin/add_article" method="post">
+        <input type="text" id="title_form" name="title" value="">
+        <input type="text" id="url_title_form" name="url_title" value="">
+        <input type="text" id="type_form" name="type" value="">
+        <input type="text" id="description_form" name="description" value="">
+        <input type="text" id="author_form" name="author" value="">
+        <input type="text" id="year_form" name="year" value="">
+        <input type="text" id="month_form" name="month" value="">
+        <input type="text" id="day_form" name="day" value="">
+    </form>
+</div>
+
+<script>
+function post() {
+    document.getElementById('title_form').value = document.getElementById('title').value;
+    document.getElementById('type_form').value = document.getElementById('type').value;
+    document.getElementById('description_form').value = document.getElementById('description').value;
+    document.getElementById('author_form').value = document.getElementById('author').value;
+    document.getElementById('year_form').value = document.getElementById('year').value;
+    document.getElementById('month_form').value = document.getElementById('month').value;
+    document.getElementById('day_form').value = document.getElementById('day').value;
+    document.getElementById('url_title_form').value = document.getElementById('url_title').value;
+    document.getElementById('form').submit();
+}
+</script>
+{% endblock %}

@@ -934,6 +934,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 5px;
 }
 
+.h-\[100px\] {
+  height: 100px;
+}
+
+.h-\[200px\] {
+  height: 200px;
+}
+
+.h-\[500px\] {
+  height: 500px;
+}
+
 .w-\[800px\] {
   width: 800px;
 }
@@ -1545,6 +1557,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pr-\[10px\] {
   padding-right: 10px;
+}
+
+.pl-\[15px\] {
+  padding-left: 15px;
+}
+
+.pr-\[15px\] {
+  padding-right: 15px;
 }
 
 .text-center {

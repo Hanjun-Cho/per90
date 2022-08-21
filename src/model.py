@@ -12,7 +12,7 @@ class Articles(db.Model):
     author = db.Column(db.Text)
     directory = db.Column(db.Text)
     views = db.Column(db.Integer, default=0)
-    uploaded = db.Column(db.Text, default=datetime.now().strftime('%m-%d-%Y %H:%M:%S'))
+    uploaded = db.Column(db.Text, default=datetime.now().strftime('%m-%d-%Y'))
 
 class Users(db.Model, UserMixin):
     __tablename__ = "users"
