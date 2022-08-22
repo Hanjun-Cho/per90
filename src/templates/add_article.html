@@ -6,8 +6,14 @@
     <input type="text" id="url_title" name="url_title" placeholder="url title" class="mt-[10px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
     
     <select name="type" id="type" class="mt-[10px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
+        <option value="analysis">Analysis</option>
+        <option value="opinions">Opinion</option>
+    </select>
+
+    <select name="subtype" id="subtype" class="mt-[10px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
         <option value="player-analysis">Player Analysis</option>
-        <option value="match-analysis">Match Analysis</option>
+        <option value="tactical-analysis">Tactical Analysis</option>
+        <option value="general-analysis">General Analysis</option>
     </select>
 
     <textarea name="description" placeholder="description" id="description" class="mt-[10px] pl-[15px] pr-[15px] pt-[5px] pb-[5px] w-[100%] border-[1px] border-black"></textarea>
@@ -16,6 +22,7 @@
         <option value="Hanjun Cho">Hanjun Cho</option>
         <option value="Eric Kim">Eric Kim</option>
         <option value="USAxSpurs">USAxSPURS</option>
+        <option value="Ulyakhin Dimitry">Dima Ulyakhin</option>
     </select>
 
     <select name="year" id="year" class="mt-[10px] w-[100%] h-[45px] border-[1px] pl-[15px] border-black">
@@ -76,6 +83,7 @@
         <input type="text" id="title_form" name="title" value="">
         <input type="text" id="url_title_form" name="url_title" value="">
         <input type="text" id="type_form" name="type" value="">
+        <input type="text" id="subtype_form" name="subtype" value="">
         <input type="text" id="description_form" name="description" value="">
         <input type="text" id="author_form" name="author" value="">
         <input type="text" id="year_form" name="year" value="">
@@ -85,9 +93,19 @@
 </div>
 
 <script>
+$('#type').on('change', function() {
+    if(document.getElementById('type').value === 'opinions') {
+        document.getElementById('subtype').style.display = 'none';
+    }
+    else {
+        document.getElementById('subtype').style.display = '';
+    }
+});
+
 function post() {
     document.getElementById('title_form').value = document.getElementById('title').value;
     document.getElementById('type_form').value = document.getElementById('type').value;
+    document.getElementById('subtype_form').value = document.getElementById('subtype').value;
     document.getElementById('description_form').value = document.getElementById('description').value;
     document.getElementById('author_form').value = document.getElementById('author').value;
     document.getElementById('year_form').value = document.getElementById('year').value;

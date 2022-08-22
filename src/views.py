@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template, url_for, redirect
 from flask_login import login_required
 from .model import Articles, Comments
 import os
@@ -10,8 +10,16 @@ def home():
     articles = Articles.query.all()
     return render_template('home.html', articles=articles)
 
+@views.route('/<type>/<subtype>/<year>/<month>/<day>/<title>')
+def analysis(type, subtype, year, month, day, title):
+    return redirect(url_for('views.analysis_load', type=type, subtype=subtype, year=year, month=month, day=day, title=title, comments_tf=False))
+
 @views.route('/<type>/<year>/<month>/<day>/<title>')
-def article(type, year, month, day, title):
+def opinions(type, year, month, day, title):
+    return redirect(url_for('views.opinions_load', type=type, year=year, month=month, day=day, title=title, comments_tf=False))
+
+@views.route('/<type>/<year>/<month>/<day>/<title>/<comments_tf>')
+def opinions_load(type, year, month, day, title, comments_tf):
     cpath = os.path.dirname(os.path.realpath(__file__))
     spath = url_for('static', filename='articles/'+type+'/'+year+'/'+month+'/'+day+'/'+title)
     path = cpath + spath + '/article.html'
@@ -26,21 +34,20 @@ def article(type, year, month, day, title):
     f.close()
 
     directory = '/'+type+'/'+year+'/'+month+'/'+day+'/'+title
-    ret = get_comments(directory)
+    article = Articles.query.filter_by(directory=directory).first()
+    ret = get_comments(article.key)
     comments = ret[0]
     comments_dict = ret[1]
     depth = ret[2]
-    article = Articles.query.filter_by(directory=directory).first()
     article.views += 1
     db.session.commit()
     return render_template('article.html', content=content, meta=meta, title=article.title, 
-    author=article.author, commented=False, comments=comments, comments_dict=comments_dict
-    , depth=depth)
+    author=article.author, commented=comments_tf, comments=comments, comments_dict=comments_dict, depth=depth)
 
-@views.route('/<type>/<year>/<month>/<day>/<title>#comments')
-def comment_article(type, year, month, day, title):
+@views.route('/<type>/<subtype>/<year>/<month>/<day>/<title>/<comments_tf>')
+def analysis_load(type, subtype, year, month, day, title, comments_tf):
     cpath = os.path.dirname(os.path.realpath(__file__))
-    spath = url_for('static', filename='articles/'+type+'/'+year+'/'+month+'/'+day+'/'+title)
+    spath = url_for('static', filename='articles/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+title)
     path = cpath + spath + '/article.html'
 
     f = open(path, 'r')
@@ -52,20 +59,19 @@ def comment_article(type, year, month, day, title):
     meta = f.read()
     f.close()
 
-    directory = '/'+type+'/'+year+'/'+month+'/'+day+'/'+title
-    ret = get_comments(directory)
+    directory = '/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+title
+    article = Articles.query.filter_by(directory=directory).first()
+    ret = get_comments(article.key)
     comments = ret[0]
     comments_dict = ret[1]
     depth = ret[2]
-    article = Articles.query.filter_by(directory=directory).first()
     article.views += 1
     db.session.commit()
-    return render_template('article.html', content=content, meta=meta, title=article.title,
-    author=article.author, commented=True, comments=comments, comments_dict=comments_dict
-    , depth=depth)
+    return render_template('article.html', content=content, meta=meta, title=article.title, 
+    author=article.author, commented=comments_tf, comments=comments, comments_dict=comments_dict, depth=depth)
 
-def get_comments(directory):
-    comments = Comments.query.filter_by(article=directory).all()
+def get_comments(key):
+    comments = Comments.query.filter_by(article=key).all()
     comments_dict = {}
     d = {}
     ret = []
@@ -90,14 +96,14 @@ def dfs_comments(key, v, ret, comments_dict, depth, d):
     
     return ret
 
-@views.route('/player-analysis')
-def player_analysis():
-    articles = Articles.query.filter_by(type='player-analysis').all()
+@views.route('/analysis')
+def analysis_tab():
+    articles = Articles.query.filter_by(type='analysis').all()
     return render_template('home.html', articles=articles)
 
-@views.route('/match-analysis')
-def match_analysis():
-    articles = Articles.query.all()
+@views.route('/opinions')
+def opinions_tab():
+    articles = Articles.query.filter_by(type='opinions').all()
     return render_template('home.html', articles=articles)
 
 @views.route('/profile')

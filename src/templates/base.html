@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="{{url_for('static', filename='css/output.css')}}">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3730842543816100" crossorigin="anonymous"></script>
         <script src="{{url_for('static', filename='jquery.js')}}"></script>
-        <script src="{{url_for('static', filename='main.js')}}"></script>
         <title>{% block title %}{% endblock %}</title>
         {% block meta %}{% endblock %}
     </head>
@@ -18,12 +17,12 @@
                 <h1 class="font-bold text-white ml-[15px]">All</h1>
             </a>
 
-            <a href="/player-analysis" class="flex items-center">
-                <h1 class="font-bold text-white ml-[15px]">SCOUTING</h1>
+            <a href="/analysis" class="flex items-center">
+                <h1 class="font-bold text-white ml-[15px]">ANALYSIS</h1>
             </a>
 
-            <a href="/match-analysis" class="flex items-center">
-                <h1 class="font-bold text-white ml-[15px]">ANALYSIS</h1>
+            <a href="/opinions" class="flex items-center">
+                <h1 class="font-bold text-white ml-[15px]">OPINIONS</h1>
             </a>
 
             {% if current_user.is_authenticated %}
@@ -52,15 +51,15 @@
                         </h1>
                     </a>
                     
-                    <a href="/player-analysis" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
+                    <a href="/analysis" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
                         <h1 class="font-bold text-[13px] pt-[3px]">
-                            SCOUTING
+                            ANALYSIS
                         </h1>
                     </a>
                     
-                    <a href="/match-analysis" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
+                    <a href="/opinions" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
                         <h1 class="font-bold text-[13px] pt-[3px]">
-                            ANALYSIS
+                            OPINIONS
                         </h1>
                     </a>
                 </div>
