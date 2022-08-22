@@ -54,8 +54,8 @@
             </a>
         </div>
 
-        <div class="w-[100%] grid grid-cols-[calc(100%-250px)_250px] mt-[50px]">
-            <div class="block mini:hidden small:hidden">
+        <div class="block small:hidden mini:hidden w-[100%] grid grid-cols-[calc(100%-250px)_250px] mt-[50px]">
+            <div class="">
                 {% for i in range(articles|length-4) %}
                     <a href="{{articles[articles|length-(i+5)].directory}}/False" class="w-[100%] grid grid-cols-[40%_auto] mt-[10px]">
                         <div class="w-[100%] aspect-video overflow-hidden">
