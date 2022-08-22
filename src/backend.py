@@ -7,7 +7,7 @@ backend = Blueprint('backend', __name__)
 
 @backend.route('/add_article', methods=['GET', 'POST'])
 def add_article():
-    if current_user.username == "admin":
+    if current_user.username == "1rrelevant":
         if request.method == 'POST':
             title = request.form.get('title')
             type = request.form.get('type')

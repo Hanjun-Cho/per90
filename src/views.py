@@ -10,14 +10,6 @@ def home():
     articles = Articles.query.all()
     return render_template('home.html', articles=articles)
 
-@views.route('/<type>/<subtype>/<year>/<month>/<day>/<title>')
-def analysis(type, subtype, year, month, day, title):
-    return redirect(url_for('views.analysis_load', type=type, subtype=subtype, year=year, month=month, day=day, title=title, comments_tf=False))
-
-@views.route('/<type>/<year>/<month>/<day>/<title>')
-def opinions(type, year, month, day, title):
-    return redirect(url_for('views.opinions_load', type=type, year=year, month=month, day=day, title=title, comments_tf=False))
-
 @views.route('/<type>/<year>/<month>/<day>/<title>/<comments_tf>')
 def opinions_load(type, year, month, day, title, comments_tf):
     cpath = os.path.dirname(os.path.realpath(__file__))

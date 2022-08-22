@@ -1436,10 +1436,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 10px;
 }
 
-.pb-\[1px\] {
-  padding-bottom: 1px;
-}
-
 .pr-\[10px\] {
   padding-right: 10px;
 }
@@ -1458,10 +1454,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pr-\[20px\] {
   padding-right: 20px;
-}
-
-.pl-\[1px\] {
-  padding-left: 1px;
 }
 
 .text-center {
