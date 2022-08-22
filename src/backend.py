@@ -23,7 +23,8 @@ def add_article():
                 cpath = os.path.dirname(os.path.realpath(__file__))
                 directory = '/'+type+'/'+year+'/'+month+'/'+day+'/'+url_title
                 spath = url_for('static', filename='articles/'+directory)
-                os.makedirs(cpath+spath)
+                if os.path.exists(cpath+spath) != True:
+                    os.makedirs(cpath+spath)
 
                 article = Articles(title=title, type=type, description=description, author=author, directory=directory, views=0)
                 db.session.add(article)
@@ -32,7 +33,8 @@ def add_article():
                 cpath = os.path.dirname(os.path.realpath(__file__))
                 directory = '/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+url_title
                 spath = url_for('static', filename='articles/'+directory)
-                os.makedirs(cpath+spath)
+                if os.path.exists(cpath+spath) != True:
+                    os.makedirs(cpath+spath)
 
                 article = Articles(title=title, type=type, description=description, author=author, directory=directory, views=0)
                 db.session.add(article)
