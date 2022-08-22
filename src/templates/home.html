@@ -53,6 +53,40 @@
                 </div>
             </a>
         </div>
+
+        <div class="w-[100%] grid grid-cols-[calc(100%-250px)_250px] mt-[50px]">
+            <div class="block mini:hidden small:hidden">
+                {% for i in range(articles|length-4) %}
+                    <a href="{{articles[articles|length-(i+5)].directory}}/False" class="w-[100%] grid grid-cols-[40%_auto] mt-[10px]">
+                        <div class="w-[100%] aspect-video overflow-hidden">
+                            <img class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all" 
+                            src="{{url_for('static', filename='articles'+articles[articles|length-(i+5)].directory+'/thumbnail.jpg')}}"></img>
+                        </div>
+                        <div class="mt-0 ml-[10px] flex items-center">
+                            <div>
+                                <h1 class="font-bold text-[19px] mini:text-[13px]">{{articles[articles|length-(i+5)].title}}</h1>
+                                <p class="text-[15px] mini:text-[11px]">{{articles[articles|length-(i+5)].author}} - {{articles[articles|length-(i+5)].uploaded}}</p>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+
+            <div id="ad-space" class="h-[600px] bg-black">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3730842543816100"
+                    crossorigin="anonymous"></script>
+                <!-- vertical ad -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-3730842543816100"
+                    data-ad-slot="2940752591"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
     
         <!-- ONCE THERES MORE THAN 10, WORK ON INFINITE LOADING -->
         <div class="hidden mini:block small:block w-[calc(100%-20px)] ml-[10px]">

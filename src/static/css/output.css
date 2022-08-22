@@ -882,6 +882,26 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 5px;
 }
 
+.h-\[80px\] {
+  height: 80px;
+}
+
+.h-\[200px\] {
+  height: 200px;
+}
+
+.h-\[500px\] {
+  height: 500px;
+}
+
+.h-\[700px\] {
+  height: 700px;
+}
+
+.h-\[600px\] {
+  height: 600px;
+}
+
 .w-\[800px\] {
   width: 800px;
 }
@@ -1284,6 +1304,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grid-cols-\[40\%_auto\] {
   grid-template-columns: 40% auto;
+}
+
+.grid-cols-\[calc\(100\%-250px\)_250px\] {
+  grid-template-columns: calc(100% - 250px) 250px;
 }
 
 .grid-rows-\[auto_30px\] {
