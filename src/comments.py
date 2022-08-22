@@ -16,17 +16,9 @@ def make_comment():
     db.session.add(comment)
 
     split = article.directory.split('/')
+    type = split[1]
 
-    if len(split) == 5:
-        type = split[1]
-        year = split[2]
-        month = split[3]
-        day = split[4]
-        name = split[5]
-        db.session.commit()
-        return redirect(url_for('views.opinions_load', type=type, year=year, month=month, day=day, title=name, comments_tf=True))
-    else:
-        type = split[1]
+    if type == 'analysis':
         subtype = split[2]
         year = split[3]
         month = split[4]
@@ -34,3 +26,11 @@ def make_comment():
         name = split[6]
         db.session.commit()
         return redirect(url_for('views.analysis_load', type=type, subtype=subtype, year=year, month=month, day=day, title=name, comments_tf=True))
+    else:
+        type = split[1]
+        year = split[2]
+        month = split[3]
+        day = split[4]
+        name = split[5]
+        db.session.commit()
+        return redirect(url_for('views.opinions_load', type=type, year=year, month=month, day=day, title=name, comments_tf=True))
