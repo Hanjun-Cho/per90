@@ -10,36 +10,27 @@ def home():
     articles = Articles.query.all()
     return render_template('home.html', articles=articles)
 
+@views.route('/<type>/<year>/<month>/<day>/<title>')
+def opinion_article(type, year, month, day, title):
+    return load_article('/'+type+'/'+year+'/'+month+'/'+day+'/'+title, False)
+
 @views.route('/<type>/<year>/<month>/<day>/<title>/<comments_tf>')
 def opinions_load(type, year, month, day, title, comments_tf):
-    cpath = os.path.dirname(os.path.realpath(__file__))
-    spath = url_for('static', filename='articles/'+type+'/'+year+'/'+month+'/'+day+'/'+title)
-    path = cpath + spath + '/article.html'
+    if type == 'analysis':
+        return load_article('/'+type+'/'+year+'/'+month+'/'+day+'/'+title+'/'+comments_tf, False)
+    return load_article('/'+type+'/'+year+'/'+month+'/'+day+'/'+title, comments_tf)
 
-    f = open(path, 'r')
-    content = f.read()
-    f.close()
-
-    path = cpath + spath + '/meta.html'
-    f = open(path, 'r')
-    meta = f.read()
-    f.close()
-
-    directory = '/'+type+'/'+year+'/'+month+'/'+day+'/'+title
-    article = Articles.query.filter_by(directory=directory).first()
-    ret = get_comments(article.key)
-    comments = ret[0]
-    comments_dict = ret[1]
-    depth = ret[2]
-    article.views += 1
-    db.session.commit()
-    return render_template('article.html', content=content, meta=meta, title=article.title, 
-    author=article.author, commented=comments_tf, comments=comments, comments_dict=comments_dict, depth=depth)
+@views.route('/<type>/<subtype>/<year>/<month>/<day>/<title>')
+def analysis_article(type, subtype, year, month, day, title):
+    return load_article('/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+title, False)
 
 @views.route('/<type>/<subtype>/<year>/<month>/<day>/<title>/<comments_tf>')
 def analysis_load(type, subtype, year, month, day, title, comments_tf):
+    return load_article('/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+title, comments_tf)
+
+def load_article(directory, comments_tf):
     cpath = os.path.dirname(os.path.realpath(__file__))
-    spath = url_for('static', filename='articles/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+title)
+    spath = url_for('static', filename='articles/'+directory)
     path = cpath + spath + '/article.html'
 
     f = open(path, 'r')
@@ -51,7 +42,6 @@ def analysis_load(type, subtype, year, month, day, title, comments_tf):
     meta = f.read()
     f.close()
 
-    directory = '/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+title
     article = Articles.query.filter_by(directory=directory).first()
     ret = get_comments(article.key)
     comments = ret[0]

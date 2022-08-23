@@ -3,7 +3,7 @@
 {% block content %}
 <div class="w-[800px] small:w-[100%] pb-[10px]">
     <div>
-        <a href="{{articles[articles|length-1].directory}}/False"><div class="w-[100%] aspect-video mt-[30px] small:mt-0 flex items-end">
+        <a href="{{articles[articles|length-1].directory}}"><div class="w-[100%] aspect-video mt-[30px] small:mt-0 flex items-end">
             <div>
                 <div class="w-[100%] aspect-video overflow-hidden">
                     <img src="{{url_for('static', filename='articles'+articles[articles|length-1].directory+'/thumbnail.jpg')}}" 
@@ -20,7 +20,7 @@
         </div></a>
     
         <div class="small:hidden mini:hidden w-[100%] grid grid-cols-3 gap-[10px] mt-[10px]">
-            <a href="{{articles[articles|length-2].directory}}/False">
+            <a href="{{articles[articles|length-2].directory}}">
                 <div class="w-[100%] aspect-video overflow-hidden">
                     <img class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all" 
                     src="{{url_for('static', filename='articles'+articles[articles|length-2].directory+'/thumbnail.jpg')}}">
@@ -31,7 +31,7 @@
                 </div>
             </a>
 
-            <a href="{{articles[articles|length-3].directory}}/False">
+            <a href="{{articles[articles|length-3].directory}}">
                 <div class="w-[100%] aspect-video overflow-hidden">
                     <img class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all" 
                     src="{{url_for('static', filename='articles'+articles[articles|length-3].directory+'/thumbnail.jpg')}}">
@@ -42,7 +42,7 @@
                 </div>
             </a>
 
-            <a href="{{articles[articles|length-4].directory}}/False">
+            <a href="{{articles[articles|length-4].directory}}">
                 <div class="w-[100%] aspect-video overflow-hidden">
                     <img class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all" 
                     src="{{url_for('static', filename='articles'+articles[articles|length-4].directory+'/thumbnail.jpg')}}">
@@ -57,7 +57,7 @@
         <div class="block small:hidden mini:hidden w-[100%] grid grid-cols-[calc(100%-250px)_250px] mt-[50px]">
             <div class="">
                 {% for i in range(articles|length-4) %}
-                    <a href="{{articles[articles|length-(i+5)].directory}}/False" class="w-[100%] grid grid-cols-[40%_auto] mt-[10px]">
+                    <a href="{{articles[articles|length-(i+5)].directory}}" class="w-[100%] grid grid-cols-[40%_auto] mt-[10px]">
                         <div class="w-[100%] aspect-video overflow-hidden">
                             <img class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all" 
                             src="{{url_for('static', filename='articles'+articles[articles|length-(i+5)].directory+'/thumbnail.jpg')}}"></img>
@@ -91,7 +91,7 @@
         <!-- ONCE THERES MORE THAN 10, WORK ON INFINITE LOADING -->
         <div class="hidden mini:block small:block w-[calc(100%-20px)] ml-[10px]">
             {% for i in range(articles|length-1) %}
-                <a href="{{articles[articles|length-(i+2)].directory}}/False" class="w-[100%] grid grid-cols-[40%_auto] mt-[10px]">
+                <a href="{{articles[articles|length-(i+2)].directory}}" class="w-[100%] grid grid-cols-[40%_auto] mt-[10px]">
                     <div class="w-[100%] aspect-video overflow-hidden">
                         <img class="w-[100%] h-[100%] hover:w-[130%] hover:h-[130%] object-cover transition-all" 
                         src="{{url_for('static', filename='articles'+articles[articles|length-(i+2)].directory+'/thumbnail.jpg')}}"></img>

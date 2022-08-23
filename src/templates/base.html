@@ -10,9 +10,11 @@
         {% block meta %}{% endblock %}
     </head>
     <body class="font-gravity">
+        <div class="flex justify-center w-full mt-[50px] text-[19px] small:text-[17px] mini:text-[15px]">{% block content %}{% endblock %}</div>
+
         <div id="cover" class="w-[100%] h-full fixed top-0 bg-black/60"></div>
 
-        <div id="mobile_sidebar" class="w-[100%] h-[calc(100%-50px)] fixed bg-lighter-black grid grid-rows-[50px_50px_50px_50px] font-mont">
+        <div id="mobile_sidebar" class="w-[100%] h-[calc(100%-50px)] fixed top-[50px] bg-lighter-black grid grid-rows-[50px_50px_50px_50px] font-mont">
             <a href="/" class="flex items-center">
                 <h1 class="font-bold text-white ml-[15px]">All</h1>
             </a>
@@ -126,7 +128,7 @@
                     </a>
     
                     <div class="w-[100%] h-[100%] hidden mini:block small:block">
-                        <div class="w-[100%] h-[100%] flex justify-center">
+                        <div class="w-[100%] h-[100%] flex justify-center font-mont">
                             <div class="w-[150px] flex justify-center items-center">
                                 <h1 class="font-bold text-[23px] pt-[3px]">
                                     <span class="text-blue">PER-</span>90
@@ -137,7 +139,6 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-center w-full mt-[50px] text-[19px] small:text-[17px] mini:text-[15px]">{% block content %}{% endblock %}</div>
     </body>
 </html>
 <script>
