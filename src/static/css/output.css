@@ -902,14 +902,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 600px;
 }
 
-.h-\[75px\] {
-  height: 75px;
-}
-
-.h-\[10px\] {
-  height: 10px;
-}
-
 .w-\[800px\] {
   width: 800px;
 }
@@ -958,12 +950,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 81px;
 }
 
-.w-full {
-  width: 100%;
+.w-\[350px\] {
+  width: 350px;
 }
 
-.w-\[200px\] {
-  width: 200px;
+.w-full {
+  width: 100%;
 }
 
 .w-\[35px\] {
@@ -1270,14 +1262,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: calc(100% - 700px);
 }
 
-.w-\[250px\] {
-  width: 250px;
-}
-
-.w-\[350px\] {
-  width: 350px;
-}
-
 .min-w-\[100px\] {
   min-width: 100px;
 }
@@ -1342,24 +1326,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-rows: auto 30px;
 }
 
+.grid-rows-\[auto_calc\(75px\/2\)\] {
+  grid-template-rows: auto calc(75px / 2);
+}
+
 .grid-rows-\[50px_50px_50px_50px\] {
   grid-template-rows: 50px 50px 50px 50px;
 }
 
 .grid-rows-\[50px_auto\] {
   grid-template-rows: 50px auto;
-}
-
-.grid-rows-2 {
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-}
-
-.grid-rows-\[75px_25px\] {
-  grid-template-rows: 75px 25px;
-}
-
-.grid-rows-\[auto_calc\(75px\/2\)\] {
-  grid-template-rows: auto calc(75px / 2);
 }
 
 .items-end {
@@ -1453,6 +1429,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(13 13 13 / 0.6);
 }
 
+.bg-red {
+  --tw-bg-opacity: 1;
+  background-color: rgb(222 78 78 / var(--tw-bg-opacity));
+}
+
 .bg-lighter-black {
   --tw-bg-opacity: 1;
   background-color: rgb(16 16 16 / var(--tw-bg-opacity));
@@ -1460,11 +1441,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-white\/10 {
   background-color: rgb(255 255 255 / 0.1);
-}
-
-.bg-red {
-  --tw-bg-opacity: 1;
-  background-color: rgb(222 78 78 / var(--tw-bg-opacity));
 }
 
 .object-cover {
@@ -1536,6 +1512,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-family: MONT, sans-serif;
 }
 
+.font-roboto {
+  font-family: ROBOTO, sans-serif;
+}
+
 .text-\[40px\] {
   font-size: 40px;
 }
@@ -1554,6 +1534,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-\[17px\] {
   font-size: 17px;
+}
+
+.text-\[16px\] {
+  font-size: 16px;
 }
 
 .text-\[19px\] {
@@ -1578,14 +1562,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-\[11px\] {
   font-size: 11px;
-}
-
-.text-\[20px\] {
-  font-size: 20px;
-}
-
-.text-\[16px\] {
-  font-size: 16px;
 }
 
 .font-bold {
@@ -1701,6 +1677,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-family: "GRAVITY_BOLD";
 
   src: url("../font/gravity-bold.otf");
+}
+
+@font-face {
+  font-family: "ROBOTO";
+
+  src: url("../font/roboto.ttf");
 }
 
 .hover\:h-\[130\%\]:hover {

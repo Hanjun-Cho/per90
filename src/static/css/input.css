@@ -26,3 +26,8 @@
     font-family: "GRAVITY_BOLD";
     src: url("../font/gravity-bold.otf");
 }
+
+@font-face {
+    font-family: "ROBOTO";
+    src: url("../font/roboto.ttf");
+}

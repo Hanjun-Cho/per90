@@ -6,7 +6,8 @@ module.exports = {
         mont: ["MONT", "sans-serif"],
         modern_sans: ["MODERN_SANS", "sans-serif"],
         gravity: ["GRAVITY", "sans-serif"],
-        gravity_bold: ["GRAVITY_BOLD", "sans-serif"]
+        gravity_bold: ["GRAVITY_BOLD", "sans-serif"],
+        roboto: ["ROBOTO", "sans-serif"]
       }
     },
     colors: {
