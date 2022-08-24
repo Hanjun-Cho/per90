@@ -14,17 +14,15 @@ def home():
 def opinion_article(type, year, month, day, title):
     return load_article('/'+type+'/'+year+'/'+month+'/'+day+'/'+title, False)
 
-@views.route('/<type>/<year>/<month>/<day>/<title>/<comments_tf>')
+@views.route('/<type>/<year>/<month>/<day>/<title>/<int:comments_tf>')
 def opinions_load(type, year, month, day, title, comments_tf):
-    if type == 'analysis':
-        return load_article('/'+type+'/'+year+'/'+month+'/'+day+'/'+title+'/'+comments_tf, False)
     return load_article('/'+type+'/'+year+'/'+month+'/'+day+'/'+title, comments_tf)
 
 @views.route('/<type>/<subtype>/<year>/<month>/<day>/<title>')
 def analysis_article(type, subtype, year, month, day, title):
     return load_article('/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+title, False)
 
-@views.route('/<type>/<subtype>/<year>/<month>/<day>/<title>/<comments_tf>')
+@views.route('/<type>/<subtype>/<year>/<month>/<day>/<title>/<int:comments_tf>')
 def analysis_load(type, subtype, year, month, day, title, comments_tf):
     return load_article('/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+title, comments_tf)
 
