@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, redirect
-from flask_login import login_required
+from flask_login import current_user
 from .model import Articles, Comments
 import os
 from . import db
@@ -10,21 +10,29 @@ def home():
     articles = Articles.query.all()
     return render_template('home.html', articles=articles)
 
+@views.route('/analysis')
+def analysis_tab():
+    articles = Articles.query.filter_by(type='analysis').all()
+    return render_template('home.html', articles=articles)
+
+@views.route('/opinions')
+def opinions_tab():
+    articles = Articles.query.filter_by(type='opinions').all()
+    return render_template('home.html', articles=articles)
+
+@views.route('/profile')
+def profile():
+    if not current_user.is_authenticated:
+        return redirect(url_for('views.home'))
+    return render_template('profile.html')
+
 @views.route('/<type>/<year>/<month>/<day>/<title>')
 def opinion_article(type, year, month, day, title):
     return load_article('/'+type+'/'+year+'/'+month+'/'+day+'/'+title, False)
 
-@views.route('/<type>/<year>/<month>/<day>/<title>/<int:comments_tf>')
-def opinions_load(type, year, month, day, title, comments_tf):
-    return load_article('/'+type+'/'+year+'/'+month+'/'+day+'/'+title, comments_tf)
-
 @views.route('/<type>/<subtype>/<year>/<month>/<day>/<title>')
 def analysis_article(type, subtype, year, month, day, title):
     return load_article('/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+title, False)
-
-@views.route('/<type>/<subtype>/<year>/<month>/<day>/<title>/<int:comments_tf>')
-def analysis_load(type, subtype, year, month, day, title, comments_tf):
-    return load_article('/'+type+'/'+subtype+'/'+year+'/'+month+'/'+day+'/'+title, comments_tf)
 
 def load_article(directory, comments_tf):
     cpath = os.path.dirname(os.path.realpath(__file__))
@@ -52,6 +60,9 @@ def load_article(directory, comments_tf):
 
 def get_comments(key):
     comments = Comments.query.filter_by(article=key).all()
+
+    if len(comments) == 0:
+        return [[], {}, {}]
     comments_dict = {}
     d = {}
     ret = []
@@ -75,18 +86,3 @@ def dfs_comments(key, v, ret, comments_dict, depth, d):
         dfs_comments(i.key, v, ret, comments_dict, depth+1, d)
     
     return ret
-
-@views.route('/analysis')
-def analysis_tab():
-    articles = Articles.query.filter_by(type='analysis').all()
-    return render_template('home.html', articles=articles)
-
-@views.route('/opinions')
-def opinions_tab():
-    articles = Articles.query.filter_by(type='opinions').all()
-    return render_template('home.html', articles=articles)
-
-@views.route('/profile')
-@login_required
-def profile():
-    return render_template('profile.html')

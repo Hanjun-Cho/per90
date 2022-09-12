@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, url_for, request, make_response, jsonify, redirect
 from flask_login import login_user, logout_user, current_user
-from .model import Users, Comments
+from .model import Downvotes, Upvotes, Users, Comments
 import os
 from . import db
 from bcrypt import hashpw, checkpw, gensalt
@@ -163,7 +163,10 @@ def delete_account():
     for i in comments:
         i.sender='deleted account'
 
-    user = Users.query.filter_by(email=current_user.email).delete()
+    Upvotes.query.filter_by(user=current_user.username).delete()
+    Downvotes.query.filter_by(user=current_user.username).delete()
+
+    Users.query.filter_by(email=current_user.email).delete()
     db.session.commit()
     logout_user()
     return redirect(url_for('views.home'))

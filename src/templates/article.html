@@ -12,52 +12,81 @@
     <div class="mt-[10px] text-[18px]">{{content | safe}}</div>
     <div id="comments"></div>
 
-    <div class="w-[100%] pb-[10px] mt-[100px]">
+    <div class="w-[100%] pb-[10px] mt-[80px]">
+        <h1 class="font-bold text-[20px] pb-[15px]">{{comments|length}} Comments</h1>
         <p id="reply_parent" class="text-[15px] ml-[75px]">replying to 
             <span id="reply" class="font-bold"></span>
             <a onclick="cancel_reply()" class="cursor-pointer"><span class="text-red font-bold">cancel</span></a>
         </p>
         <p id="reply_content" class="ml-[75px] text-[15px] w-[calc(100%-75px)]"></p>
-        <div class="w-[100%] grid grid-cols-[75px_auto_45px] mt-[5px]">
-            <div class="flex justify-center items-center">
-                {% if current_user.is_authenticated %}
-                <div class="w-[50px] aspect-square bg-white border-[1px] border-black rounded-full flex justify-center items-center">  
-                    <h1 class="text-black font-bold pr-[1px] text-[25px]">{{current_user.username[:2]|upper}}</h1>
+
+        <div class="w-[100%]">
+            <textarea name="content" 
+            x-data="{resize: () => { $el.style.height = '5px'; $el.style.height = $el.scrollHeight + 'px' }}"
+            @input="resize()"
+            placeholder="Send Message..." 
+            class="w-[100%] border-b-[1px] bg-black/5 outline-none h-[49px] border-black resize-none pl-[15px] pr-[15px] pb-[10px] pt-[10px] overflow-y-hidden" id="content"></textarea>
+        </div>
+
+        <div class="w-[100%] flex justify-end pb-[15px]">
+            <div class="w-[220px] grid grid-cols-2">
+                <div class="flex justify-end items-center">
+                    <button class="bg-black/10 w-[calc(100%-2.5px)] h-[100%] text-black text-[16px] rounded-[1px] mt-[5px]">Cancel</button>
                 </div>
-                {% else %}
-                <div class="w-[50px] aspect-square border-[1px] border-black bg-white flex justify-center items-center rounded-full">  
-                    <img src="{{url_for('static', filename='img/icons/profile.png')}}" class="rounded-full w-[87%] h-[80%] mt-[10px]">
+                <div class="flex justify-end items-center">
+                    <button class="bg-dark-yellow w-[calc(100%-2.5px)] h-[100%] text-white text-[16px] rounded-[1px] mt-[5px]">Comment</button>
                 </div>
-                {% endif %}
-            </div>
-            <div class="flex items-center">
-                {% if current_user.is_authenticated %}
-                <input type="text" name="content" id="content" placeholder="enter comment" class="border-b-[1px] w-[100%] h-[45px] bg-black/5 outline-none border-black pl-[10px] text-[17px]">
-                {% else %}
-                <div class="w-[100%] h-[45px] border-black border-b-[1px] flex items-center bg-black/5">
-                    <p class="ml-[15px]">please signup or login to comment</p>
-                </div>
-                {% endif %}
-            </div>
-            <div class="flex justify-center items-center">
-                {% if current_user.is_authenticated %}
-                <button onclick="send_comment()" id="comment_button" class="cursor-pointer"><div class="w-[45px] aspect-square bg-blue rounded-r-[5px] flex justify-center items-center">
-                    <img src="{{url_for('static', filename='img/icons/send.png')}}" class="w-[40%] h-[40%]">
-                </div></button>
-                {% else %}
-                <a class="cursor-pointer"><div class="w-[45px] aspect-square bg-blue rounded-r-[5px] flex justify-center items-center">
-                    <img src="{{url_for('static', filename='img/icons/send.png')}}" class="w-[40%] h-[40%]">
-                </div></a>
-                {% endif %}
             </div>
         </div>
 
         {% for i in comments %}
-            <div class="w-[calc(100%-{{depth[i.key|string]*20}}px)] min-w-[100px] pt-[10px] pb-[10px] 
-            rounded-[5px] bg-black/5 grid grid-cols-[75px_auto] mt-[10px] max-ml-[700px] ml-[{{depth[i.key|string]*20}}px]">
-                <div class="flex justify-center h-[50px]">
-                    <div class="w-[50px] aspect-square bg-white border-[1px] border-black rounded-full flex justify-center items-center">  
-                        <h1 class="w-[100%] h-[100%]text-black font-bold text-[25px] text-center">{{i.sender[:2]|upper}}</h1>
+            <div class="w-[calc(100%-{{depth[i.key|string]*20}}px)] mt-[10px] pb-[10px] min-w-[100px] max-ml-[700px] ml-[{{depth[i.key|string]*20}}px] grid grid-cols-[30px_auto] gap-[10px]">
+                <div class="h-[90px] grid grid-rows-[30px_30px_30px]" x-data="{votes:0, voted:'none'}">
+                    <div class="flex justify-center items-center"><img id="{{i.key}}" onclick="upvote(event)" class="cursor-pointer w-[70%] h-[70%]" 
+                    x-data="{
+                        on: () => {$el.src = '{{url_for('static', filename='img/icons/up_arrow_full.png')}}'},
+                        off: () => {$el.src = '{{url_for('static', filename='img/icons/up_arrow_empty.png')}}'}
+                    }"
+                    :class="voted=='up' ? on() : off()" @mouseover="on()" @mouseleave="voted=='up' ? on() : off()" 
+                    @click="voted=='up' ? off() : on(), voted=='down' ? votes+=1 : votes+=0, voted=='up' ? votes-=1 : votes+=1, voted=='up' ? voted='none' : voted='up'" 
+                    src="{{url_for('static', filename='img/icons/up_arrow_empty.png')}}">
+                    </div>
+                    
+                    <div class="flex justify-center font-bold text-center" x-text="votes"></div>
+                    
+                    <div class="flex justify-center items-center"><img id="{{i.key}}" onclick="downvote(event)" class="cursor-pointer w-[70%] h-[70%]" 
+                    x-data="{
+                        on: () => {$el.src = '{{url_for('static', filename='img/icons/down_arrow_full.png')}}'},
+                        off: () => {$el.src = '{{url_for('static', filename='img/icons/down_arrow_empty.png')}}'}
+                    }"
+                    :class="voted=='down' ? on() : off()" @mouseover="on()" @mouseleave="voted=='down' ? on() : off()" 
+                    @click="voted=='down' ? off() : on(), voted=='up' ? votes-=1 : votes+=0, voted=='down' ? votes+=1 : votes-=1, voted=='down' ? voted='none' : voted='down'" 
+                    src="{{url_for('static', filename='img/icons/down_arrow_empty.png')}}">
+                    </div>
+                </div>
+                <div>
+                    <p class="font-bold">{{i.sender}} <span class="font-normal text-black/50">11 minutes ago</span></p>
+                    <p class="pb-[5px]">{{i.content}}</p>
+                    <button class="w-[90px] h-[30px] bg-black/5 hover:bg-dark-yellow hover:text-white rounded-[3px] transition-all">reply</button>
+                </div>
+            </div>
+
+            <script>
+                function upvote(e){
+                    console.log(e.target.id);
+                }
+
+                function downvote(e) {
+                    console.log(e.target.id);
+                }
+            </script>
+            <!-- <div class="w-[calc(100%-{{depth[i.key|string]*20}}px)] min-w-[100px] pt-[10px] pb-[10px] 
+            rounded-[5px] grid grid-cols-[75px_auto] mt-[10px] max-ml-[700px] ml-[{{depth[i.key|string]*20}}px]">
+                <div>
+                    <div class="w-[50px] aspect-square">
+                        <div class="w-[50px] aspect-square bg-white border-[1px] border-black rounded-full flex justify-center items-center">  
+                            <h1 class="w-[100%] h-[100%]text-black font-bold text-[25px] text-center">{{i.sender[:2]|upper}}</h1>
+                        </div>
                     </div>
                 </div>
                 <div class="min-w-[100px] grid grid-rows-[auto_30px]">
@@ -108,9 +137,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         {% endfor %}
-
     </div>
     
     <form id="comment_form" class="hidden" action="/make_comment" method="post">
@@ -138,14 +166,6 @@
         </div>
     </div>
 </div>
-{% if commented == 1 %}
-<script>
-    console.log('test');
-    $(function() {
-        $("html, body").animate({ scrollTop: $("#comments").offset().top }, 0);
-    });
-</script>
-{% endif %}
 
 <script>
 document.getElementById('reply_parent').style.display = 'none';

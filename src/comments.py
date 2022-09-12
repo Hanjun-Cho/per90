@@ -42,12 +42,8 @@ def deleted_comment():
     article = Articles.query.filter_by(title=title).first()
     
     # option 1 - delete all replies
-    comments = Comments.query.filter_by(parent=key).all()
-
-    for i in comments:
-        Comments.query.filter_by(key=i.key).delete()
-
-    Comments.query.filter_by(key=key).delete()
+    v = set()
+    dfs_delete(key, v)
     db.session.commit()
 
     split = article.directory.split('/')
@@ -69,3 +65,15 @@ def deleted_comment():
         name = split[5]
         db.session.commit()
         return redirect(url_for('views.opinions_load', type=type, year=year, month=month, day=day, title=name, comments_tf=True))
+
+def dfs_delete(key, v):
+    if(key in v):
+        return
+
+    comments = Comments.query.filter_by(parent=key).all()
+
+    for i in comments:
+        dfs_delete(i.key, v)
+    
+    Comments.query.filter_by(key=key).delete()
+    return

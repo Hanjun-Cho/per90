@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="{{url_for('static', filename='css/output.css')}}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='img/icons/logo.png') }}">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3730842543816100" crossorigin="anonymous"></script>
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <script src="{{url_for('static', filename='jquery.js')}}"></script>
         <title>{% block title %}{% endblock %}</title>
         {% block meta %}{% endblock %}
@@ -41,26 +42,26 @@
 
         <div id="navbar" class="w-full large:justify-center h-[50px] bg-black flex text-white fixed top-0">
             <div class="w-[800px] grid grid-cols-[150px_auto] mini:hidden small:hidden font-mont">
-                <a href="/" class="flex justify-center items-center bg-white/10">
+                <a href="/" class="flex justify-center items-center bg-white/10 hover:bg-black transition-all">
                     <h1 class="font-bold text-[23px] pt-[3px]">
-                        <span class="text-blue">PER-</span>90
+                        <span class="text-yellow">PER-</span>90
                     </h1>
                 </a>
                 
                 <div class="grid grid-cols-5">
-                    <a href="/" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
+                    <a href="/" class="flex justify-center items-center hover:bg-yellow hover:text-black text-white transition-colors cursor-pointer">
                         <h1 class="font-bold text-[13px] pt-[3px]">
                             ALL
                         </h1>
                     </a>
                     
-                    <a href="/analysis" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
+                    <a href="/analysis" class="flex justify-center items-center hover:bg-yellow hover:text-black text-white transition-colors cursor-pointer">
                         <h1 class="font-bold text-[13px] pt-[3px]">
                             ANALYSIS
                         </h1>
                     </a>
                     
-                    <a href="/opinions" class="flex justify-center items-center hover:bg-blue transition-colors cursor-pointer">
+                    <a href="/opinions" class="flex justify-center items-center hover:bg-yellow hover:text-black text-white transition-colors cursor-pointer">
                         <h1 class="font-bold text-[13px] pt-[3px]">
                             OPINIONS
                         </h1>

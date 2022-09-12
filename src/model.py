@@ -33,3 +33,18 @@ class Comments(db.Model):
     article = db.Column(db.Text) #connects to article directory
     parent = db.Column(db.Text, default="") #connects to comment key
     content = db.Column(db.Text)
+    date_commented = db.Column(db.Text, default=datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+
+class Upvotes(db.Model):
+    __tablename__ = "upvotes"
+
+    key = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.Text) #connects to comment key
+    user = db.Column(db.Text) #connects to user key
+
+class Downvotes(db.Model):
+    __tablename__ = "downvotes"
+
+    key = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.Text) #connects to comment key
+    user = db.Column(db.Text) #connects to user key

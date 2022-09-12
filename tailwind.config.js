@@ -16,7 +16,9 @@ module.exports = {
       'black':'#0d0d0d',
       'lighter-black':'#101010',
       'spurs-blue':'#132257',
-      'blue':'#42a2d6'
+      'blue':'#42a2d6',
+      "yellow":"e0ec5f",
+      "dark-yellow":"#B4BF40"
     },
     screens: {
       'large':{'min':'861px'},
